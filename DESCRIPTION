@@ -9,7 +9,10 @@ Authors@R: c(
     comment=c(ORCID="https://orcid.org/0000-0001-7808-5911")))
 Maintainer: Dan Kelley <Dan.Kelley@Dal.Ca>
 Depends: R (>= 4.1.0)
-Suggests: knitr, testthat (>= 3.0.0)
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
 BugReports: https://github.com/dankelley/atmosphere/issues
 Description: Supports the analysis of Atmospheric data.
 License: GPL (>= 2)
