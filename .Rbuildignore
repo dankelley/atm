@@ -1,0 +1,4 @@
+.*~$
+.*.txt$
+^.*\.Rproj$
+^\.Rproj\.user$

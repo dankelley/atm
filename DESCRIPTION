@@ -1,0 +1,22 @@
+Package: atmosphere
+Title: Analysis of Atmospheric Data
+Version: 0.0.1
+Authors@R: c(
+    person(given="Dan",
+    family="Kelley",
+    email="Dan.Kelley@Dal.Ca",
+    role=c("aut", "cre"),
+    comment=c(ORCID="https://orcid.org/0000-0001-7808-5911")))
+Maintainer: Dan Kelley <Dan.Kelley@Dal.Ca>
+Depends: R (>= 4.1.0)
+Suggests: knitr, testthat (>= 3.0.0)
+BugReports: https://github.com/dankelley/atmosphere/issues
+Description: Supports the analysis of Atmospheric data.
+License: GPL (>= 2)
+Encoding: UTF-8
+URL: https://www.github.com/dankelley/atmosphere/
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+BuildVignettes: true
+VignetteBuilder: knitr
+Packaged: Dan Kelley
