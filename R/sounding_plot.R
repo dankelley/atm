@@ -42,8 +42,8 @@ plotAtmosphericSounding <- function(sounding, item = "DWPT+TEMP") {
         ok <- is.finite(hp)
         # print(data.frame(h = h[ok], hp = hp[ok], labels = labels[ok]))
         mtext(labels[ok], at = hp[ok], side = 4, las = 2, cex = 0.8)
-        legend("bottomleft",
-            lwd = par("lwd"), col = c(2, 4),
+        legend("topright",
+            lwd = par("lwd"), col = c(2, 4), cex = 0.8,
             legend = c("Temperature", "Dew Point"),
             bg = "white"
         )

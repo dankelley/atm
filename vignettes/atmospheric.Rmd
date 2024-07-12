@@ -7,8 +7,8 @@ output:
     toc: true
     number_sections: true
     fig_caption: yes
-    fig_width: 3.5
-    fig_height: 3.5
+    fig_width: 7
+    fig_height: 5
     dpi: 72
     dev.args: list(pointsize=11)
 vignette: >
@@ -25,8 +25,21 @@ editor_options:
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-**Abstract.** FIXME: write this vignette.
+**Abstract.** This shows how to plot a recent atmospheric sounding at the
+default location, Shearwater, Nova Scotia, Canada.
 
+```{r, echo = TRUE}
+library(atmosphere)
+dayOffsets <- seq(-2, -1)
+par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
+soundingFile <- downloadAtmosphericSounding()
+sounding <- readAtmosphericSounding(soundingFile)
+plotAtmosphericSounding(sounding)
+# Clean up files for the R vignette.  In practice, though, there is
+# no real problem in retaining the files unless the computer has very
+# little free storage.
+unlink(soundingFile)
+```
 
 # References
 
