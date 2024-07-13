@@ -11,7 +11,15 @@ readAtmosphericSounding(file)
 This file must have been downloaded with \code{\link[=downloadAtmosphericSounding]{downloadAtmosphericSounding()}}.}
 }
 \description{
-Read atmospheric sounding data
+If the file was downloaded with \code{\link[=downloadAtmosphericSounding]{downloadAtmosphericSounding()}} then the
+filename will hold information on the station and date, so those things will
+be inferred from and stored in the \code{metadata} of the return value.
+}
+\examples{
+library(atmosphere)
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
+sounding <- readAtmosphericSounding(file)
+
 }
 \author{
 Dan Kelley

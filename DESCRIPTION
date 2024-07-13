@@ -8,7 +8,7 @@ Authors@R: c(
     role=c("aut", "cre"),
     comment=c(ORCID="https://orcid.org/0000-0001-7808-5911")))
 Maintainer: Dan Kelley <Dan.Kelley@Dal.Ca>
-Depends: R (>= 4.1.0)
+Depends: R (>= 4.3.0), S7
 Suggests:
     knitr,
     rmarkdown,

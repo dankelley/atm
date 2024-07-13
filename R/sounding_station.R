@@ -12,5 +12,5 @@
 #'
 #' @export
 stationNumber <- function(name = "Shearwater") {
-    list("Shearwater" = "73110", "Nashville" = "72327")[name]
+    list("Shearwater" = "73110", "Nashville" = "72327")[[name]]
 }

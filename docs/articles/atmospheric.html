@@ -93,21 +93,21 @@ Canada.</p>
 <h2 id="plot-the-most-recent-sounding-for-shearwater-nova-scotia-canada-">Plot the most recent sounding for Shearwater, Nova Scotia,
 Canada.<a class="anchor" aria-label="anchor" href="#plot-the-most-recent-sounding-for-shearwater-nova-scotia-canada-"></a>
 </h2>
-<p>This downloads the most recent sounding. Note the use of
-<code><a href="https://rdrr.io/r/base/try.html" class="external-link">try()</a></code>, to avoid an error if the server (reference 1) cannot
-supply the file via the constructed URL (reference 2).</p>
+<p>This example uses a sample data file that is provided in the package,
+because otherwise building the vignette can yield an error, if the
+server (Reference 1) is unreachable or is too busy to return files.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.github.com/dankelley/atmosphere/" class="external-link">atmosphere</a></span><span class="op">)</span></span>
-<span><span class="va">dayOffsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">soundingFile</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/downloadAtmosphericSounding.html">downloadAtmosphericSounding</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; downloaded file Shearwater_2024-07-11.txt</span></span></code></pre></div>
+<span><span class="co">#&gt; Loading required package: S7</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">soundingFile</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0.7</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="va">sounding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readAtmosphericSounding.html">readAtmosphericSounding</a></span><span class="op">(</span><span class="va">soundingFile</span><span class="op">)</span></span>
-<span>    <span class="fu"><a href="../reference/plotAtmosphericSounding.html">plotAtmosphericSounding</a></span><span class="op">(</span><span class="va">sounding</span><span class="op">)</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">soundingFile</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dayOffsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Shearwater_2024-07-11.txt.gz"</span>, package <span class="op">=</span> <span class="st">"atmosphere"</span><span class="op">)</span></span>
+<span><span class="va">sounding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readAtmosphericSounding.html">readAtmosphericSounding</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">sounding</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in rug(seq(100, 1000, by = 100), side = 2, ticksize = -0.02, lwd =</span></span>
+<span><span class="co">#&gt; par("lwd")): some values will be clipped</span></span>
+<span><span class="co">#&gt; Warning in rug(hp, side = 4, ticksize = -0.02, lwd = par("lwd")): some values</span></span>
+<span><span class="co">#&gt; will be clipped</span></span></code></pre></div>
 <p><img src="atmospheric_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level2">

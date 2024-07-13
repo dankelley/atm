@@ -16,12 +16,14 @@
 #' (i.e. this is handed to [par()] by this function). The default removes some
 #' whitespace in the margins.
 #'
+#' @name plot
+#'
 #' @examples
 #' library(atmosphere)
 #' # Normally, would download the file with downloadAtmosphericSounding()
 #' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
 #' sounding <- readAtmosphericSounding(file)
-#' plotAtmosphericSounding(sounding)
+#' plot(sounding)
 #'
 #' @references
 #' 1. <https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams>
@@ -34,15 +36,17 @@
 #' @export
 #'
 #' @author Dan Kelley
-plotAtmosphericSounding <- function(
-    sounding, item = "DWPT+TEMP",
-    mar = c(3, 3, 1, 3), mgp = c(2, 0.7, 0)) {
-    pressure <- sounding$PRES
-    dewpoint <- sounding$DWPT
-    temperature <- sounding$TEMP
-    height <- sounding$HGHT
+S7::method(`plot`, atmosphere:::sounding) <- function(
+    x, item = "skewT",
+    mar = c(3, 3, 1, 3),
+    mgp = c(2, 0.7, 0)) {
+    pressure <- x@data$PRES
+    dewpoint <- x@data$DWPT
+    temperature <- x@data$TEMP
+    height <- x@data$HGHT
     par(mar = mar, mgp = mgp)
-    if (item == "DWPT+TEMP") {
+    if (item == "skewT") {
+        par(mar = mar, mgp = mgp)
         # print(par('mar'))
         plot(dewpoint, pressure,
             log = "y",
@@ -82,13 +86,7 @@ plotAtmosphericSounding <- function(
             legend = c("Temperature", "Dew Point"),
             bg = "white"
         )
-        mtext(
-            sprintf(
-                "%s Sounding on %s", attr(sounding, "stationName"),
-                attr(sounding, "date")
-            ),
-            adj = 0
-        )
+        mtext(sprintf("%s Sounding on %s", x@metadata$stationName, x@metadata$date), adj = 0)
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }
 }

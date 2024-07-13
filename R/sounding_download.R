@@ -43,8 +43,8 @@ downloadAtmosphericSounding <- function(
     } else {
         message("using cached file ", file)
     }
-    attr(file, "stationName") <- stationName
-    attr(file, "stationNumber") <- stationNumber
-    attr(file, "date") <- sprintf("%4d-%02d-%02d", year, month, day)
+    # attr(file, "stationName") <- stationName
+    # attr(file, "stationNumber") <- stationNumber
+    # attr(file, "date") <- sprintf("%4d-%02d-%02d", year, month, day)
     file
 }
