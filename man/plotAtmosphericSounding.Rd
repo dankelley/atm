@@ -4,25 +4,46 @@
 \alias{plotAtmosphericSounding}
 \title{Plot atmospheric sounding data}
 \usage{
-plotAtmosphericSounding(sounding, item = "DWPT+TEMP")
+plotAtmosphericSounding(
+  sounding,
+  item = "DWPT+TEMP",
+  mar = c(3, 3, 1, 3),
+  mgp = c(2, 0.7, 0)
+)
 }
 \arguments{
 \item{sounding}{the result of a call to \code{\link[=readAtmosphericSounding]{readAtmosphericSounding()}}.}
 
 \item{item}{character value indicating what to plot. At the moment,
 the only choices is the default, \code{"DWPT+TEMP"}.}
+
+\item{mar}{4-element numeric vector specifying margins, in the standard way
+(i.e. this is handed to \code{\link[=par]{par()}} by this function). The default
+is set to give space for height indications in the right margin.}
+
+\item{mgp}{3-element numeric vector specifying axis spacing, in the usual way
+(i.e. this is handed to \code{\link[=par]{par()}} by this function). The default removes some
+whitespace in the margins.}
 }
 \description{
-Plot atmospheric sounding data
+This is a preliminary version.  Over time, it might be evolved to
+plot something nearer what is shown at Reference 1.
 }
 \examples{
 library(atmosphere)
-soundingFile <- downloadAtmosphericSounding(stationName = "Shearwater")
-sounding <- readAtmosphericSounding(soundingFile)
+# Normally, would download the file with downloadAtmosphericSounding()
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
+sounding <- readAtmosphericSounding(file)
 par(mar = c(3, 3, 1, 3), mgp = c(2, 0.7, 0))
 plotAtmosphericSounding(sounding)
-unlink(soundingFile)
 
+}
+\references{
+\enumerate{
+\item \url{https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams}
+\item Visual Explanation of Meteorological Skew T Log P Sounding Diagrams, 2019.
+\url{https://www.youtube.com/watch?v=7p7c85hhgOo}.
+}
 }
 \author{
 Dan Kelley
