@@ -1,4 +1,6 @@
 .*~$
+^.github$
+^docs$
 .*.txt$
 ^.*\.Rproj$
 ^\.Rproj\.user$

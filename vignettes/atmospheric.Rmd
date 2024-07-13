@@ -28,20 +28,27 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 **Abstract.** This shows how to plot a recent atmospheric sounding at the
 default location, Shearwater, Nova Scotia, Canada.
 
+
+# Plot the most recent sounding for Shearwater, Nova Scotia, Canada.
+
+
+This downloads the most recent sounding. Note the use of `try()`, to avoid an
+error if the server (reference 1) cannot supply the file via the constructed
+URL (reference 2).
+
 ```{r, echo = TRUE}
 library(atmosphere)
 dayOffsets <- seq(-2, -1)
-par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
-soundingFile <- downloadAtmosphericSounding()
-sounding <- readAtmosphericSounding(soundingFile)
-plotAtmosphericSounding(sounding)
-# Clean up files for the R vignette.  In practice, though, there is
-# no real problem in retaining the files unless the computer has very
-# little free storage.
-unlink(soundingFile)
+soundingFile <- try(downloadAtmosphericSounding())
+if (!inherits(soundingFile, "try-error")) {
+    par(mar = c(3, 3, 1, 1), mgp = c(2, 0.7, 0))
+    sounding <- readAtmosphericSounding(soundingFile)
+    plotAtmosphericSounding(sounding)
+    unlink(soundingFile)
+}
 ```
 
 # References
 
-1. https://weather.uwyo.edu/upperair/sounding.html
-2. https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2024&MONTH=07&FROM=1012&TO=1012&STNM=73110
+1. <https://weather.uwyo.edu/upperair/sounding.html>
+2. <https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2024&MONTH=07&FROM=1012&TO=1012&STNM=73110>
