@@ -29,7 +29,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 default location, Shearwater, Nova Scotia, Canada.
 
 
-# Plot the most recent sounding for Shearwater, Nova Scotia, Canada.
+# Plot a sample sounding for Shearwater, Nova Scotia, Canada.
 
 
 This example uses a sample data file that is provided in the package, because
