@@ -14,7 +14,14 @@
 #'
 #' @author Dan Kelley
 S7::method(`summary`, atmosphere:::sounding) <- function(x) {
-    cat("@data entries:     ", paste(names(x@data), sep = " "), "\n")
-    cat("@metadata entries: ", paste(names(x@metadata), sep = " "), "\n")
+    cat(sprintf(
+        "Station %s (#%s at %.2fE, %.2fN) on %s: %d data and %d metadata\n",
+        x@metadata[["Station identifier"]],
+        x@metadata[["Station number"]],
+        x@metadata[["Station longitude"]],
+        x@metadata[["Station latitude"]],
+        x@metadata[["Observation time"]],
+        length(x@data), length(x@metadata)
+    ))
     invisible(x)
 }

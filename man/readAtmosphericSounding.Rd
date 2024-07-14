@@ -11,9 +11,12 @@ readAtmosphericSounding(file)
 This file must have been downloaded with \code{\link[=downloadAtmosphericSounding]{downloadAtmosphericSounding()}}.}
 }
 \description{
-If the file was downloaded with \code{\link[=downloadAtmosphericSounding]{downloadAtmosphericSounding()}} then the
-filename will hold information on the station and date, so those things will
-be inferred from and stored in the \code{metadata} of the return value.
+Read an HTML file downloaded by \code{\link[=downloadAtmosphericSounding]{downloadAtmosphericSounding()}}.  This
+code works by recognizing portions of the file as preformatted blocks, which
+is a brittle method that will fail if the HTML format used on the server website
+changes.  Obviously, it would be better to work with csv or json files, but
+we have no way to know how to download such files, since the server provides
+no documentation.
 }
 \examples{
 library(atmosphere)

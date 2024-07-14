@@ -86,7 +86,10 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             legend = c("Temperature", "Dew Point"),
             bg = "white"
         )
-        mtext(sprintf("%s Sounding on %s", x@metadata$stationName, x@metadata$date), adj = 0)
+        mtext(sprintf(
+            "Station %s on %s", x@metadata[["Station identifier"]],
+            x@metadata[["Observation time"]]
+        ), adj = 0)
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }
 }
