@@ -1,6 +1,7 @@
 .*~$
 ^.github$
 ^docs$
+^[1-9]+.png$
 .*.txt$
 ^.*\.Rproj$
 ^\.Rproj\.user$

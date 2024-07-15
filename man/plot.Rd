@@ -20,6 +20,12 @@ is set to give space for height indications in the right margin.}
 \item{mgp}{3-element numeric vector specifying axis spacing, in the usual way
 (i.e. this is handed to \code{\link[=par]{par()}} by this function). The default removes some
 whitespace in the margins.}
+
+\item{debug}{an integer specifying whether information is to be printed
+during processing. The default, 0, means to avoid such printing. Any
+positive value means to print some information.  (That information will
+vary over the course of evolution of the code, so do not rely on
+particular behaviour.)}
 }
 \description{
 This is a preliminary version.  Over time, it might be evolved to

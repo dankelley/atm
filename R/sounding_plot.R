@@ -19,6 +19,12 @@
 #' (i.e. this is handed to [par()] by this function). The default removes some
 #' whitespace in the margins.
 #'
+#' @param debug an integer specifying whether information is to be printed
+#' during processing. The default, 0, means to avoid such printing. Any
+#' positive value means to print some information.  (That information will
+#' vary over the course of evolution of the code, so do not rely on
+#' particular behaviour.)
+#'
 #' @name plot
 #' @aliases plot.atmosphericSounding
 #'
@@ -43,29 +49,31 @@
 S7::method(`plot`, atmosphere:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
     mar = c(3, 3, 1, 3),
-    mgp = c(2, 0.7, 0)) {
+    mgp = c(2, 0.7, 0), debug = 0) {
+    colHeight <- "gray"
+    lwdDewpoint <- 1
+    lwdTemperature <- 2
     pressure <- x@data$PRES
     dewpoint <- x@data$DWPT
     temperature <- x@data$TEMP
     height <- x@data$HGHT
-    par(mar = mar, mgp = mgp)
     if (item == "skewT") {
         par(mar = mar, mgp = mgp)
         # print(par('mar'))
-        plot(dewpoint, pressure,
+        plot(0, 1000,
             log = "y",
-            ylim = c(1050, 100), xlim = c(-40, 35),
-            yaxs = "i",
+            ylim = c(1050, 100), xlim = c(-40, 40),
+            xaxs = "i", yaxs = "i",
             xlab = expression("Temperature and Dew Point [" * degree * "C]"),
             ylab = "Pressure [hPa]",
-            type = "l", col = 4
+            type = "n"
         )
-        rug(seq(100, 1000, by = 100), side = 2, ticksize = -0.02, lwd = par("lwd"))
-        lines(temperature, pressure, col = 2)
+        rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
+        usr <- par("usr")
+        lines(dewpoint - skew(pressure), pressure, lwd = lwdDewpoint)
+        lines(temperature - skew(pressure), pressure, lwd = lwdTemperature)
         # dry adiabats slope up to the left
         # FIXME: why straight? Doesn't C_P change?
-        # FIXME: sites say T sloped 45deg but how can that make sense generally?
-        usr <- par("usr")
         pressureBottom <- 10^usr[3]
         for (TT in seq(-80, 300, 20)) {
             lapseRate <- dryLapseRate() # the factor is because h is in km, not m
@@ -73,17 +81,21 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             # print(head(data.frame(Tdry=Tdry, height=height, pressure=pressure)))
             lines(Tdry, pressure - pressure[1] + pressureBottom, col = "darkgray")
         }
-        # height axis at RHS
-        h <- 1e3 * c(1, 2, 5, 10)
-        hp <- approx(height, pressure, h)$y
-        abline(h = hp, col = "gray")
-        ok <- is.finite(hp)
+        # report height at same pressures as used by Wisconson
+        pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
+        heightReport <- approx(pressure, height, pressureReport, ties = mean)$y
+        if (debug > 0) {
+            cat("pressureReport:\n")
+            print(data.frame(heightReport = heightReport, pressureReport = pressureReport))
+        }
+        abline(h = pressureReport, col = colHeight)
         # print(data.frame(h = h[ok], hp = hp[ok], labels = labels[ok]))
-        mtext(paste0("   ", h[ok] / 1e3, " km"), at = hp[ok], side = 4, las = 2, cex = 0.8)
-        abline(h = hp, col = "gray")
-        h <- 1e3 * (1:20)
-        hp <- approx(height, pressure, h)$y
-        rug(hp, side = 4, ticksize = -0.02, lwd = par("lwd"))
+        xlabel <- rep(usr[1] + 0 * (usr[2] - usr[1]), length(pressureReport))
+        text(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8, pos = 4)
+        # abline(h = hp, col = "gray")
+        # h <- 1e3 * (1:20)
+        # hp <- approx(height, pressure, h[ok])$y
+        # rug(hp, side = 4, ticksize = -0.02, lwd = par("lwd"))
         if (legend) {
             legend("topleft",
                 lwd = par("lwd"), col = c(2, 4), cex = 0.8,
@@ -94,11 +106,9 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         mtext(sprintf(
             "Station %s on %s", x@metadata[["Station identifier"]],
             x@metadata[["Observation time"]]
-        ), adj = 0)
+        ), side = 3, adj = 0)
         # add isotherms
-        usr <- par("usr")
         p0 <- seq(10^usr[3], 10^usr[4], length.out = 100)
-        print(range(p0))
         for (isotherm in seq(-200, 40, 5)) {
             T0 <- isotherm - skew(p0)
             lines(T0, p0, col = "darkgray")

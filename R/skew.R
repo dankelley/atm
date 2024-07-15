@@ -15,18 +15,19 @@
 #'
 #' @export
 skew <- function(pressure) {
-    fin <- par("fin")
+    pin <- par("pin")
     usr <- par("usr")
-    # message(oce::vectorShow(fin))
-    # message(oce::vectorShow(usr))
-    dxscaled <- (usr[2] - usr[1]) / fin[1]
-    dyscaled <- (usr[4] - usr[3]) / fin[2]
-    # message(oce::vectorShow(dxscaled))
-    # message(oce::vectorShow(dyscaled))
+    # cat("skew()...\n")
+    # cat("  ", oce::vectorShow(pin))
+    # cat("  ", oce::vectorShow(usr))
+    dxscaled <- (usr[2] - usr[1]) / pin[1]
+    dyscaled <- (usr[4] - usr[3]) / pin[2]
+    # cat("  ", oce::vectorShow(dxscaled))
+    # cat("  ", oce::vectorShow(dyscaled))
     ratio <- -dxscaled / dyscaled
-    # message(oce::vectorShow(ratio))
-    if (ratio < 60 || ratio > 120) {
-        warning("The ratio, ", ratio, " is outside the expected range of 60 to 120")
-    }
+    # cat("  ", oce::vectorShow(ratio))
+    # if (ratio < 60 || ratio > 120) {
+    #    warning("The ratio, ", ratio, " is outside the expected range of 60 to 120")
+    # }
     ratio * log10(100 * pressure / 1e5) - ratio * log10(100 * 1050 / 1e5)
 }
