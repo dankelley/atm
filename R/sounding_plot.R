@@ -8,6 +8,9 @@
 #' @param item character value indicating what to plot. At the moment,
 #' the only choices is the default, `"DWPT+TEMP"`.
 #'
+#' @param legend logical value indicating whether to show a legend in the top-
+#' left corner.  This is FALSE by default.
+#'
 #' @param mar 4-element numeric vector specifying margins, in the standard way
 #' (i.e. this is handed to [par()] by this function). The default
 #' is set to give space for height indications in the right margin.
@@ -17,6 +20,7 @@
 #' whitespace in the margins.
 #'
 #' @name plot
+#' @aliases plot.atmosphericSounding
 #'
 #' @examples
 #' library(atmosphere)
@@ -37,7 +41,7 @@
 #'
 #' @author Dan Kelley
 S7::method(`plot`, atmosphere:::sounding) <- function(
-    x, item = "skewT",
+    x, item = "skewT", legend = FALSE,
     mar = c(3, 3, 1, 3),
     mgp = c(2, 0.7, 0)) {
     pressure <- x@data$PRES
@@ -80,16 +84,25 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         h <- 1e3 * (1:20)
         hp <- approx(height, pressure, h)$y
         rug(hp, side = 4, ticksize = -0.02, lwd = par("lwd"))
-        # legend -- not sure if I want this, though
-        legend("topright",
-            lwd = par("lwd"), col = c(2, 4), cex = 0.8,
-            legend = c("Temperature", "Dew Point"),
-            bg = "white"
-        )
+        if (legend) {
+            legend("topleft",
+                lwd = par("lwd"), col = c(2, 4), cex = 0.8,
+                legend = c("Temperature", "Dew Point"),
+                bg = "white"
+            )
+        }
         mtext(sprintf(
             "Station %s on %s", x@metadata[["Station identifier"]],
             x@metadata[["Observation time"]]
         ), adj = 0)
+        # add isotherms
+        usr <- par("usr")
+        p0 <- seq(10^usr[3], 10^usr[4], length.out = 100)
+        print(range(p0))
+        for (isotherm in seq(-200, 40, 5)) {
+            T0 <- isotherm - skew(p0)
+            lines(T0, p0, col = "darkgray")
+        }
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }
 }

@@ -2,12 +2,16 @@
 % Please edit documentation in R/sounding_plot.R
 \name{plot}
 \alias{plot}
+\alias{plot.atmosphericSounding}
 \title{Plot atmospheric sounding data}
 \arguments{
 \item{sounding}{the result of a call to \code{\link[=readAtmosphericSounding]{readAtmosphericSounding()}}.}
 
 \item{item}{character value indicating what to plot. At the moment,
 the only choices is the default, \code{"DWPT+TEMP"}.}
+
+\item{legend}{logical value indicating whether to show a legend in the top-
+left corner.  This is FALSE by default.}
 
 \item{mar}{4-element numeric vector specifying margins, in the standard way
 (i.e. this is handed to \code{\link[=par]{par()}} by this function). The default
