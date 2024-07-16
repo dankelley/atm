@@ -1,9 +1,9 @@
-pandoc: '2.18'
+pandoc: 3.1.1
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   atmospheric: atmospheric.html
-last_built: 2024-07-15T19:47Z
+last_built: 2024-07-16T08:50Z
 urls:
-  reference: https://github.com/dankelley/atmosphere/reference
-  article: https://github.com/dankelley/atmosphere/articles
+  reference: https://dankelley.github.io/atmosphere/reference
+  article: https://dankelley.github.io/atmosphere/articles
