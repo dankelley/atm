@@ -1,11 +1,10 @@
 #' Dry lapse rate in degC / m
 #'
 #' @param g numeric value of the acceleration due to gravity at sea level,
-#' with the default being as listed in Reference 1, converted to
-#' J/(kg*K).
+#' with the default being as listed in Reference 1, converted to m/s^2.
 #'
 #' @param C_P numeric value of the specific heat of air at sea level,
-#' with the default being as listed in Reference 1, converted to m/s^2.
+#' with the default being as listed in Reference 1, converted to J/(kg*K).
 #'
 #' @return `dryLapseRate` returns the lapse rate, in degrees C (or Kelvin) per
 #' metre.

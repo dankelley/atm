@@ -75,11 +75,16 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         # dry adiabats slope up to the left
         # FIXME: why straight? Doesn't C_P change?
         pressureBottom <- 10^usr[3]
-        for (TT in seq(-80, 300, 20)) {
-            lapseRate <- dryLapseRate() # the factor is because h is in km, not m
-            Tdry <- TT - lapseRate * (height - height[1])
+        for (TT in seq(-80, 300, 10)) {
+            lapseRate <- dryLapseRate()
+            Tdry <- TT - lapseRate * height
+            if (abs(TT - 20) < 5) {
+                message("TT=", TT)
+                print(data.frame(pressure = pressure, height = height, Tdry = Tdry)[pressure > 100, ])
+            }
+            lines(Tdry, pressure, col = "red")
             # print(head(data.frame(Tdry=Tdry, height=height, pressure=pressure)))
-            lines(Tdry, pressure - pressure[1] + pressureBottom, col = "darkgray")
+            # lines(Tdry, pressure - pressure[1] + pressureBottom, col = "darkgray")
         }
         # report height at same pressures as used by Wisconson
         pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
