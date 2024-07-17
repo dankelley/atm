@@ -50,9 +50,14 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
     mar = c(3, 3, 1, 3),
     mgp = c(2, 0.7, 0), debug = 0) {
-    colHeight <- "gray"
-    lwdDewpoint <- 1
-    lwdTemperature <- 2
+    aes <- list(
+        height = list(col = "gray", lwd = 1, lty = 1),
+        temperature = list(col = 2, lwd = 3, lty = 1),
+        isotherm = list(col = 2, lwd = 1, lty = 1),
+        dewpoint = list(col = 4, lwd = 3, lty = 1),
+        adiabatDry = list(col = "Dark Orange", lwd = 2, lty = 3),
+        adiabatWet = list(col = "Dark Olive Green", lwd = 1, lty = 3)
+    )
     pressure <- x@data$PRES
     dewpoint <- x@data$DWPT
     temperature <- x@data$TEMP
@@ -70,21 +75,14 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         )
         rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
         usr <- par("usr")
-        lines(dewpoint - skew(pressure), pressure, lwd = lwdDewpoint)
-        lines(temperature - skew(pressure), pressure, lwd = lwdTemperature)
+        SKEW <- skew(pressure)
+        lines(dewpoint - SKEW, pressure, col = aes$dewpoint$col, lwd = aes$dewpoint$lwd, lty = aes$dewpoint$lty)
+        lines(temperature - SKEW, pressure, col = aes$temperature$col, lwd = aes$temperature$lwd, lty = aes$temperature$lty)
         # dry adiabats slope up to the left
-        # FIXME: why straight? Doesn't C_P change?
-        pressureBottom <- 10^usr[3]
         for (TT in seq(-80, 300, 10)) {
-            lapseRate <- dryLapseRate()
-            Tdry <- TT - lapseRate * height
-            if (abs(TT - 20) < 5) {
-                message("TT=", TT)
-                print(data.frame(pressure = pressure, height = height, Tdry = Tdry)[pressure > 100, ])
-            }
-            lines(Tdry, pressure, col = "red")
-            # print(head(data.frame(Tdry=Tdry, height=height, pressure=pressure)))
-            # lines(Tdry, pressure - pressure[1] + pressureBottom, col = "darkgray")
+            lines(theta2T(TT, pressure) - SKEW, pressure,
+                col = aes$adiabatDry$col, lwd = aes$adiabatDry$lwd, lty = aes$adiabatDry$lty
+            )
         }
         # report height at same pressures as used by Wisconson
         pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
@@ -93,7 +91,7 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             cat("pressureReport:\n")
             print(data.frame(heightReport = heightReport, pressureReport = pressureReport))
         }
-        abline(h = pressureReport, col = colHeight)
+        abline(h = pressureReport, lwd = aes$height$lwd, col = aes$height$col, lty = aes$height$lty)
         # print(data.frame(h = h[ok], hp = hp[ok], labels = labels[ok]))
         xlabel <- rep(usr[1] + 0 * (usr[2] - usr[1]), length(pressureReport))
         text(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8, pos = 4)
@@ -112,11 +110,11 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             "Station %s on %s", x@metadata[["Station identifier"]],
             x@metadata[["Observation time"]]
         ), side = 3, adj = 0)
-        # add isotherms
+        # Skewed isotherms
         p0 <- seq(10^usr[3], 10^usr[4], length.out = 100)
         for (isotherm in seq(-200, 40, 5)) {
             T0 <- isotherm - skew(p0)
-            lines(T0, p0, col = "darkgray")
+            lines(T0, p0, col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty)
         }
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }
