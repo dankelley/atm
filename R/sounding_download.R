@@ -1,6 +1,14 @@
 #' Download atmospheric sounding data
 #'
-#' @author Dan Kelley
+#' The file is downloaded from Reference 1, by constructing a URL
+#' that queries the server for a particular station and time. The
+#' construction of that URL is based on reverse-engineering the
+#' URLs that get created by clicking on a map.  This means
+#' that `downloadAtmosphericSounding` is brittle, and will
+#' fail if the server setup changes.  Unfortunately, this
+#' guessing game seems to be the best we can do, since the website
+#' does not provide information on the URL construction, let alone
+#' an API.
 #'
 #' @importFrom utils download.file read.fwf
 #'
@@ -15,7 +23,13 @@
 #' @param stationName a character value indicating the station name, which
 #' the present function converts to a station number by [stationNumber()].
 #'
+#' @references
+#'
+#' 1. <https://weather.uwyo.edu/upperair/sounding.html>
+#'
 #' @export
+#'
+#' @author Dan Kelley
 downloadAtmosphericSounding <- function(
     date = Sys.Date() - 1,
     region = "naconf",
