@@ -2,7 +2,7 @@
 library(atmosphere)
 
 test_that("conversion between degrees C and Kelvin", {
-    expect_equal(20, K2C(C2K(20)))
+    expect_equal(20, TK2TC(TC2TK(20)))
 })
 
 test_that("conversion to potential temperature and back", {
