@@ -12,7 +12,7 @@ dTdp_moist(TK, p)
 \item{p}{pressure in Pa (100*mbar)}
 }
 \value{
-\code{dTdp_moist} returns the derivative in K/Pa (I assume).
+\code{dTdp_moist} returns the derivative in K/Pa.
 }
 \description{
 This is from pymeteo; I cannot find the equivalent formula at

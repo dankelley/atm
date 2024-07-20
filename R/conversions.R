@@ -1,7 +1,7 @@
 # vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
 
 #' Convert from millibars to Pascals
-#' @param p numeric value of pressure in millibars.
+#' @param mbar numeric value of pressure in millibars.
 #' @return `mbar2Pa` returns pressure in Pa.
 #' @export
 mbar2Pa <- function(mbar) {
@@ -9,7 +9,7 @@ mbar2Pa <- function(mbar) {
 }
 
 #' Convert from Pascls to millibars
-#' @param p numeric value of pressure in Pascals.
+#' @param Pa numeric value of pressure in Pascals.
 #' @return `Pa2mbar` returns pressure in millibars.
 #' @export
 Pa2mbar <- function(Pa) {

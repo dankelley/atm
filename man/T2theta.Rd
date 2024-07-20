@@ -20,8 +20,12 @@ with the default values as in Reference 2.}
 \code{T2theta} returns potential temperature, in degrees Celcius.
 }
 \description{
-Potential temperature is computed as in Chapter 3 of Reference 1, i.e. as
-the reverse of the formula used for \code{\link[=T2theta]{T2theta()}}.
+Potential temperature is computed as in Chapter 3 of Reference 1, i.e. by
+dividing the in-situ temperature by the ratio of actual pressure to reference
+pressure, raised to the power \code{Rd}/\code{Cp}. (The computation is done in Absolute
+Temperature, with conversions to and from Celcius being done with \code{\link[=TK2TC]{TK2TC()}}
+and \code{\link[=TC2TK]{TC2TK()}}, respectively.)  See also \code{\link[=theta2T]{theta2T()}}, which is the inverse
+of \code{T2theta()}.
 }
 \references{
 \enumerate{

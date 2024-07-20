@@ -21,8 +21,11 @@ cv <- 718. # pymeteo
 #' Compute air in-situ temperature from potential temperature
 #'
 #' In-situ temperature is computed as in Chapter 3 of Reference 1, i.e. by
-#' multiplying the potential temperature by the ratio of actual to reference
-#' pressure, raised to the power R/Cp.
+#' multiplying the potential temperature by the ratio of actual pressure to reference
+#' pressure, raised to the power `Rd`/`Cp`. (The computation is done in Absolute
+#' Temperature, with conversions to and from Celcius being done with [TK2TC()]
+#' and [TC2TK()], respectively.)  See also [T2theta()], which is the inverse
+#' of `theta2T()`.
 #'
 #' @param theta numeric value indicating potential temperature in
 #' degrees C.
@@ -53,8 +56,12 @@ theta2T <- function(theta, pressure,
 
 #' Compute air potential temperature from in-situ temperature
 #'
-#' Potential temperature is computed as in Chapter 3 of Reference 1, i.e. as
-#' the reverse of the formula used for [T2theta()].
+#' Potential temperature is computed as in Chapter 3 of Reference 1, i.e. by
+#' dividing the in-situ temperature by the ratio of actual pressure to reference
+#' pressure, raised to the power `Rd`/`Cp`. (The computation is done in Absolute
+#' Temperature, with conversions to and from Celcius being done with [TK2TC()]
+#' and [TC2TK()], respectively.)  See also [theta2T()], which is the inverse
+#' of `T2theta()`.
 #'
 #' @param temperature numeric value indicating in-situ temperature in
 #' degrees C.
@@ -157,7 +164,7 @@ dTdz_moist <- function(TK, p) {
 #'
 #' @param p pressure in Pa (100*mbar)
 #'
-#' @return `dTdp_moist` returns the derivative in K/Pa (I assume).
+#' @return `dTdp_moist` returns the derivative in K/Pa.
 #'
 #' @export
 dTdp_moist <- function(TK, p) {

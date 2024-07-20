@@ -7,7 +7,7 @@
 mbar2Pa(mbar)
 }
 \arguments{
-\item{p}{numeric value of pressure in millibars.}
+\item{mbar}{numeric value of pressure in millibars.}
 }
 \value{
 \code{mbar2Pa} returns pressure in Pa.

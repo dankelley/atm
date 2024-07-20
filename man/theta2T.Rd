@@ -21,8 +21,11 @@ with the default values as in Reference 2.}
 }
 \description{
 In-situ temperature is computed as in Chapter 3 of Reference 1, i.e. by
-multiplying the potential temperature by the ratio of actual to reference
-pressure, raised to the power R/Cp.
+multiplying the potential temperature by the ratio of actual pressure to reference
+pressure, raised to the power \code{Rd}/\code{Cp}. (The computation is done in Absolute
+Temperature, with conversions to and from Celcius being done with \code{\link[=TK2TC]{TK2TC()}}
+and \code{\link[=TC2TK]{TC2TK()}}, respectively.)  See also \code{\link[=T2theta]{T2theta()}}, which is the inverse
+of \code{theta2T()}.
 }
 \references{
 \enumerate{
