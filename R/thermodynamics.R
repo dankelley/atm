@@ -180,29 +180,10 @@ dTdz_moist <- function(TK, p) {
 #'
 #' @export
 dTdp_moist <- function(TK, p) {
-    dTdz_moist(TK, p) * -((Rd * TK) / (p * g))
+    -dTdz_moist(TK, p) * (Rd * TK) / (p * g)
 }
 
-#' Draw moist adiabat
-#' @param TC temperature in Kelvin
-#' @export
-drawMoistAdiabat <- function(TC) {
-    TK <- TC2TK(TC)
-    p <- 105e3
-    dp <- 1e3
-    pp <- p
-    TKTK <- TK
-    for (i in 1:100) {
-        TK <- TK + dTdp_moist(TK, p) * dp
-        p <- p - dp
-        pp <- c(pp, p)
-        TKTK <- c(TKTK, TK)
-    }
-    print(head(data.frame(p = pp / 100, T = TK2TC(TKTK))))
-    lines(skew(pp / 100) + TK2TC(TKTK), pp / 100, col = "forestgreen", lwd = 3)
-}
-
-#' Determine skew for skew-T/log(p) diagrams
+#' Determine skew for skew-T diagrams
 #'
 #' Based on the plotted data range and figure geometry, this determines a
 #' temperature skew that be equivalent to a 45 degree rotation of isotherms.  A
@@ -234,4 +215,31 @@ skew <- function(pressure) {
     #    warning("The ratio, ", ratio, " is outside the expected range of 60 to 120")
     # }
     ratio * log10(100 * pressure / 1e5) - ratio * log10(100 * 1050 / 1e5)
+}
+
+#' Compute moist adiabat line
+#'
+#' This is done by integrating [dTdp_moist()] from p=100.5e3 Pa (1005 mbar)
+#' to 1e3 Pa (100 mbar). This is based on `draw_moist_adiabat()` in `pymeteo`,
+#' but here we do not integrate twice.  (What does that doubled integration do?)
+#'
+#' @param TC temperature in Kelvin
+#'
+#' @return `moistAdiabat' returns a data frame with `p` (in mbar) and
+#' temperature `T` (in degC).
+#'
+#' @export
+moistAdiabat <- function(TC) {
+    TK <- TC2TK(TC)
+    p <- 105e3
+    dp <- 1e3
+    pp <- p
+    TKTK <- TK
+    for (i in 1:100) {
+        TK <- TK + dTdp_moist(TK, p) * dp
+        p <- p - dp
+        pp <- c(pp, p)
+        TKTK <- c(TKTK, TK)
+    }
+    data.frame(p = pp / 100, T = TK2TC(TKTK))
 }

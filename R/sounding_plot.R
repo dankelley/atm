@@ -55,8 +55,8 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         temperature = list(col = 2, lwd = 3, lty = 1),
         isotherm = list(col = 2, lwd = 1, lty = 1),
         dewpoint = list(col = 4, lwd = 3, lty = 1),
-        adiabatDry = list(col = "Dark Orange", lwd = 2, lty = 3),
-        adiabatWet = list(col = "Dark Olive Green", lwd = 1, lty = 3)
+        adiabatDry = list(col = "Dark Orange", lwd = 2, lty = 1),
+        adiabatWet = list(col = "Dark Olive Green", lwd = 2, lty = 1)
     )
     pressure <- x@data$PRES
     dewpoint <- x@data$DWPT
@@ -76,15 +76,30 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
         usr <- par("usr")
         SKEW <- skew(pressure)
-        lines(dewpoint - SKEW, pressure, col = aes$dewpoint$col, lwd = aes$dewpoint$lwd, lty = aes$dewpoint$lty)
-        lines(temperature - SKEW, pressure, col = aes$temperature$col, lwd = aes$temperature$lwd, lty = aes$temperature$lty)
+        lines(dewpoint - SKEW, pressure,
+            col = aes$dewpoint$col, lwd = aes$dewpoint$lwd, lty = aes$dewpoint$lty
+        )
+        lines(temperature - SKEW, pressure,
+            col = aes$temperature$col, lwd = aes$temperature$lwd, lty = aes$temperature$lty
+        )
         # dry adiabats slope up to the left
         for (TT in seq(-80, 300, 10)) {
             lines(theta2T(TT, pressure) - SKEW, pressure,
                 col = aes$adiabatDry$col, lwd = aes$adiabatDry$lwd, lty = aes$adiabatDry$lty
             )
         }
-        # report height at same pressures as used by Wisconson
+        # wet adiabats
+        # FIXME: these look wrong. I don't understand why pymeteo integrates
+        # twice to compute these. Also, should we use theta2T() on the result?
+        for (TT in seq(-80, 300, 10)) {
+            wa <- moistAdiabat(TT)
+            print(wa)
+            #lines(wa$T - skew(wa$p), wa$p,
+            lines(theta2T(wa$T, wa$p) - skew(wa$p), wa$p,
+                col = aes$adiabatWet$col, lwd = aes$adiabatWet$lwd, lty = aes$adiabatWet$lty
+            )
+        }
+        # report height at same pressures as used by Wisconson server
         pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
         heightReport <- approx(pressure, height, pressureReport, ties = mean)$y
         if (debug > 0) {
@@ -114,7 +129,8 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         p0 <- seq(10^usr[3], 10^usr[4], length.out = 100)
         for (isotherm in seq(-200, 40, 5)) {
             T0 <- isotherm - skew(p0)
-            lines(T0, p0, col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty)
+            lines(T0, p0,
+                  col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty)
         }
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }

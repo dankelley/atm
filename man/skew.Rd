@@ -2,7 +2,7 @@
 % Please edit documentation in R/thermodynamics.R
 \name{skew}
 \alias{skew}
-\title{Determine skew for skew-T/log(p) diagrams}
+\title{Determine skew for skew-T diagrams}
 \usage{
 skew(pressure)
 }
