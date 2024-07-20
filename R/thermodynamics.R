@@ -1,3 +1,5 @@
+# vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
+
 # Below, WC stands for Wallace, John M., and Peter Victor Hobbs. Atmospheric
 # Science: An Introductory Survey. 2nd ed. International Geophysics Series, v.
 # 92. Amsterdam ; Boston: Elsevier Academic Press, 2006.
@@ -16,26 +18,11 @@ cpl <- 4190.0 # pymeteo
 cpi <- 2118.636 # pymeteo
 cv <- 718. # pymeteo
 
-#' Convert degrees C to Kelvin
-#' @param TC numeric value of temperature in degrees C.
-#' @return `TC2TK` returns the equivalent temperature in Kelvin.
-#' @author Dan Kelley
-#' @export
-TC2TK <- function(TC) TC + TC0
-
-#' Convert Kelvin to degrees C
-#' @param TK numeric value of temperature in K.
-#' @return `TK2TC` returns the equivalent temperature in degrees C.
-#' @author Dan Kelley
-#' @export
-TK2TC <- function(TK) TK - TC0
-
 #' Compute air in-situ temperature from potential temperature
 #'
-#' In-situ temperature is computed as in Reference 1, by multiplying the
-#' potential temperature by the ratio of actual to reference pressure,
-#' raised to the power R/Cp.  Although both `R` and `Cp` can be specified in
-#' this function, the default values are recommended for consistency.
+#' In-situ temperature is computed as in Chapter 3 of Reference 1, i.e. by
+#' multiplying the potential temperature by the ratio of actual to reference
+#' pressure, raised to the power R/Cp.
 #'
 #' @param theta numeric value indicating potential temperature in
 #' degrees C.
@@ -43,35 +30,31 @@ TK2TC <- function(TK) TK - TC0
 #' @param pressure numeric value indicating pressure in mbar (equivalently,
 #' in hPa).
 #'
-#' @param R dry-air gas constant, with the default value of
-#' 287.052874 from Reference 2.
-#'
-#' @param Cp dry-air mass-specific heat, with the default value of
-#' 1003.5 J/kg/K from Reference 3.  (Note that 1005 is given in some
-#' websites.)
+#' @param Rd,Cp dry-air gas constant and mass-specific heat capacity,
+#' with the default values as in Reference 2.
 #'
 #' @return `theta2T` returns in-situ temperature, in degrees Celcius.
 #'
-#' @author Dan Kelley, based on reference 1.
+#' @author Dan Kelley, with the default values for `Rd` and `cp`
+#' taken from Reference 1.
 #'
 #' @references
-#' 1. <https://en.wikipedia.org/wiki/Potential_temperature>
-#' 2. <https://en.wikipedia.org/wiki/Gas_constant>
-#' 3. <https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities>
+#' 1. Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
+#'    Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
+#'    Amsterdam ; Boston: Elsevier Academic Press, 2006.
+#' 2. <https://github.com/cwebster2/pyMeteo>
 #'
 #' @export
 theta2T <- function(theta, pressure,
-                    R = 287.052874, Cp = 1003.5) {
-    TK2TC(TC2TK(theta) * (pressure / pressureReference)^(R / Cp))
+                    Rd = 287.04, Cp = 1005.7) {
+    TK2TC(TC2TK(theta) * (pressure / pressureReference)^(Rd / Cp))
 }
 
 
 #' Compute air potential temperature from in-situ temperature
 #'
-#' Potential temperature is computed as in Reference 1, by multiplying the
-#' in-situ temperature by the ratio reference pressure to the actual pressure,
-#' raised to the power R/Cp.  Although both `R` and `Cp` can be specified in
-#' this function, the default values are recommended for consistency.
+#' Potential temperature is computed as in Chapter 3 of Reference 1, i.e. as
+#' the reverse of the formula used for [T2theta()].
 #'
 #' @param temperature numeric value indicating in-situ temperature in
 #' degrees C.
@@ -79,26 +62,24 @@ theta2T <- function(theta, pressure,
 #' @param pressure numeric value indicating pressure in mbar (equivalently,
 #' in hPa).
 #'
-#' @param R dry-air gas constant, with the default value of
-#' 287.052874 from Reference 2.
-#'
-#' @param Cp dry-air mass-specific heat, with the default value of
-#' 1003.5 J/kg/K from Reference 3.  (Note that 1005 is given in some
-#' websites.)
+#' @param Rd,Cp dry-air gas constant and mass-specific heat capacity,
+#' with the default values as in Reference 2.
 #'
 #' @return `T2theta` returns potential temperature, in degrees Celcius.
 #'
-#' @author Dan Kelley, based on reference 1.
+#' @author Dan Kelley, with the default values for `Rd` and `Cp`
+#' taken from Reference 1.
 #'
 #' @references
-#' 1. <https://en.wikipedia.org/wiki/Potential_temperature>
-#' 2. <https://en.wikipedia.org/wiki/Gas_constant>
-#' 3. <https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities>
+#' 1. Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
+#'    Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
+#'    Amsterdam ; Boston: Elsevier Academic Press, 2006.
+#' 2. <https://github.com/cwebster2/pyMeteo>
 #'
 #' @export
 T2theta <- function(temperature, pressure,
-                    R = 287.052874, Cp = 1003.5) {
-    TK2TC(TC2TK(temperature) * (pressureReference / pressure)^(R / Cp))
+                    Rd = 287.04, Cp = 1005.7) {
+    TK2TC(TC2TK(temperature) * (pressureReference / pressure)^(Rd / Cp))
 }
 
 #' Dry lapse rate in degC / m

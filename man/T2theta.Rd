@@ -4,7 +4,7 @@
 \alias{T2theta}
 \title{Compute air potential temperature from in-situ temperature}
 \usage{
-T2theta(temperature, pressure, R = 287.052874, Cp = 1003.5)
+T2theta(temperature, pressure, Rd = 287.04, Cp = 1005.7)
 }
 \arguments{
 \item{temperature}{numeric value indicating in-situ temperature in
@@ -13,29 +13,25 @@ degrees C.}
 \item{pressure}{numeric value indicating pressure in mbar (equivalently,
 in hPa).}
 
-\item{R}{dry-air gas constant, with the default value of
-287.052874 from Reference 2.}
-
-\item{Cp}{dry-air mass-specific heat, with the default value of
-1003.5 J/kg/K from Reference 3.  (Note that 1005 is given in some
-websites.)}
+\item{Rd, Cp}{dry-air gas constant and mass-specific heat capacity,
+with the default values as in Reference 2.}
 }
 \value{
 \code{T2theta} returns potential temperature, in degrees Celcius.
 }
 \description{
-Potential temperature is computed as in Reference 1, by multiplying the
-in-situ temperature by the ratio reference pressure to the actual pressure,
-raised to the power R/Cp.  Although both \code{R} and \code{Cp} can be specified in
-this function, the default values are recommended for consistency.
+Potential temperature is computed as in Chapter 3 of Reference 1, i.e. as
+the reverse of the formula used for \code{\link[=T2theta]{T2theta()}}.
 }
 \references{
 \enumerate{
-\item \url{https://en.wikipedia.org/wiki/Potential_temperature}
-\item \url{https://en.wikipedia.org/wiki/Gas_constant}
-\item \url{https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities}
+\item Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
+Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
+Amsterdam ; Boston: Elsevier Academic Press, 2006.
+\item \url{https://github.com/cwebster2/pyMeteo}
 }
 }
 \author{
-Dan Kelley, based on reference 1.
+Dan Kelley, with the default values for \code{Rd} and \code{Cp}
+taken from Reference 1.
 }
