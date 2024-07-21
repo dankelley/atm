@@ -11,8 +11,22 @@ The `atmosphere` package provides R functions for dealing with atmospheric
 properties. It is *very* preliminary, and function names and actions may change
 a lot at any moment.
 
-*Warning.* The package is designed to work with files provided via the GUI at a
-University of Wyoming server
-([https://weather.uwyo.edu/upperair/sounding.html](https://weather.uwyo.edu/upperair/sounding.html))
-and it will be rendered non-functional if that server changes its URL structure
-or the format of the data files it provides. Given sufficient interest, the code could be altered to accommodate changes to the server, but since this is all based on reverse engineering, there is no way to be sure of success.
+Please note that this package is designed to work with files provided
+via the GUI at a University of Wyoming server (Reference 1) and key
+functions will fail if that server changes its URL structure or the
+format of the files it provides.
+
+For more on how to read skew-T diagrams, see for example References 2
+and 3.
+
+# References
+
+1. University of Wyoming. “Radiosonde Data,” July 21, 2024.
+<https://weather.uwyo.edu/upperair/sounding.html>
+
+2. Fontana, Joe. “Learn to Read a Skew-T Diagram Like a Meteorologist!
+   In Pictures.” Wildcard Weather (blog), February 22, 2015.
+<https://wildcardweather.com/2015/02/21/learn-to-read-a-skew-t-diagram-like-a-meteorologist-in-pictures/>.
+ 
+3. National Oceanic and Atmospheric Administration. “Skew-T Plots,”
+   July 21, 2024. <https://www.noaa.gov/jetstream/upperair/skew-t-plots>.
