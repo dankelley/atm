@@ -48,7 +48,7 @@
 #' @author Dan Kelley
 S7::method(`plot`, atmosphere:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
-    mar = c(3, 3, 1, 3),
+    mar = c(2, 3, 1, 3),
     mgp = c(2, 0.7, 0), debug = 0) {
     aes <- list(
         height = list(col = "gray", lwd = 1, lty = 1),
@@ -69,12 +69,17 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             log = "y",
             ylim = c(1050, 100), xlim = c(-40, 40),
             xaxs = "i", yaxs = "i",
-            xlab = expression("Temperature and Dew Point [" * degree * "C]"),
+            xlab = "", # expression("Temperature and Dew Point [" * degree * "C]"),
             ylab = "Pressure [hPa]",
-            type = "n"
+            type = "n", axes = FALSE
         )
-        rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
         usr <- par("usr")
+        box()
+        axis(2)
+        # rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
+        for (temp in seq(-30, 30, 10)) {
+            text(temp-2, 10^usr[3]*1.1, bquote(.(temp)*degree), srt = 45, xpd = NA, col = 2, font = 2)
+        }
         SKEW <- skew(pressure)
         lines(dewpoint - SKEW, pressure,
             col = aes$dewpoint$col, lwd = aes$dewpoint$lwd, lty = aes$dewpoint$lty
@@ -124,7 +129,7 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         ), side = 3, adj = 0)
         # Skewed isotherms
         p0 <- seq(10^usr[3], 10^usr[4], length.out = 100)
-        for (isotherm in seq(-200, 40, 5)) {
+        for (isotherm in seq(-200, 40, 10)) {
             T0 <- isotherm - skew(p0)
             lines(T0, p0,
                 col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty
