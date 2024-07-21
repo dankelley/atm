@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   atmospheric: atmospheric.html
-last_built: 2024-07-21T13:34Z
+last_built: 2024-07-21T17:22Z
 urls:
   reference: https://dankelley.github.io/atmosphere/reference
   article: https://dankelley.github.io/atmosphere/articles

@@ -40,7 +40,7 @@
 #' 2. Visual Explanation of Meteorological Skew T Log P Sounding Diagrams, 2019.
 #' <https://www.youtube.com/watch?v=7p7c85hhgOo>.
 #'
-#' @importFrom graphics abline legend lines mtext par rug
+#' @importFrom graphics abline legend lines mtext par rect rug strheight strwidth text
 #' @importFrom stats approx
 #'
 #' @export
@@ -54,7 +54,7 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         height = list(col = "gray", lwd = 1, lty = 1),
         temperature = list(col = 2, lwd = 3, lty = 1), # red
         isotherm = list(col = 2, lwd = 1, lty = 1), # red
-        dewpoint = list(col = 4, lwd = 3, lty = 1), # blue
+        dewpoint = list(col = 4, lwd = 2, lty = 1), # blue
         adiabatDry = list(col = 7, lwd = 1.4), # amber
         adiabatWet = list(col = 3, lwd = 1.4) # green
     )
@@ -109,9 +109,6 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
             print(data.frame(heightReport = heightReport, pressureReport = pressureReport))
         }
         abline(h = pressureReport, lwd = aes$height$lwd, col = aes$height$col, lty = aes$height$lty)
-        # print(data.frame(h = h[ok], hp = hp[ok], labels = labels[ok]))
-        xlabel <- rep(usr[1] + 0 * (usr[2] - usr[1]), length(pressureReport))
-        text(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8, pos = 4)
         # abline(h = hp, col = "gray")
         # h <- 1e3 * (1:20)
         # hp <- approx(height, pressure, h[ok])$y
@@ -135,6 +132,9 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
                 col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty
             )
         }
+        # label heights (with white below)
+        xlabel <- rep(usr[1] + 0.08 * (usr[2] - usr[1]), length(pressureReport))
+        textInBox(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8)
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }
 }
