@@ -2,18 +2,19 @@
 % Please edit documentation in R/thermodynamics.R
 \name{moistAdiabat}
 \alias{moistAdiabat}
-\title{Compute moist adiabat line}
+\title{Compute moist adiabat curve for sounding plot}
 \usage{
 moistAdiabat(TC)
 }
 \arguments{
-\item{TC}{temperature in Kelvin}
+\item{TC}{temperature in degrees Celcius.}
 }
 \value{
 \verb{moistAdiabat' returns a data frame with }p\verb{(in mbar) and temperature}T` (in degC).
 }
 \description{
 This is done by integrating \code{\link[=dTdp_moist]{dTdp_moist()}} from p=100.5e3 Pa (1005 mbar)
-to 1e3 Pa (100 mbar). This is based on \code{draw_moist_adiabat()} in \code{pymeteo},
-but here we do not integrate twice.  (What does that doubled integration do?)
+to 1e3 Pa (100 mbar). Note that the computation is done in Pa and Kelvin,
+so we need to do conversions at start and end, because this is used by
+\code{\link[=plot.atmosphericSounding]{plot.atmosphericSounding()}}, which works in those units.
 }

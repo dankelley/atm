@@ -52,11 +52,11 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
     mgp = c(2, 0.7, 0), debug = 0) {
     aes <- list(
         height = list(col = "gray", lwd = 1, lty = 1),
-        temperature = list(col = 2, lwd = 3, lty = 1),
-        isotherm = list(col = 2, lwd = 1, lty = 1),
-        dewpoint = list(col = 4, lwd = 3, lty = 1),
-        adiabatDry = list(col = "Dark Orange", lwd = 2, lty = 1),
-        adiabatWet = list(col = "Dark Olive Green", lwd = 2, lty = 1)
+        temperature = list(col = 2, lwd = 3, lty = 1), # red
+        isotherm = list(col = 2, lwd = 1, lty = 1), # red
+        dewpoint = list(col = 4, lwd = 3, lty = 1), # blue
+        adiabatDry = list(col = 7, lwd = 1.4), # amber
+        adiabatWet = list(col = 3, lwd = 1.4) # green
     )
     pressure <- x@data$PRES
     dewpoint <- x@data$DWPT
@@ -88,14 +88,11 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
                 col = aes$adiabatDry$col, lwd = aes$adiabatDry$lwd, lty = aes$adiabatDry$lty
             )
         }
-        # wet adiabats
-        # FIXME: these look wrong. I don't understand why pymeteo integrates
-        # twice to compute these. Also, should we use theta2T() on the result?
-        for (TT in seq(-80, 300, 10)) {
-            wa <- moistAdiabat(TT)
-            print(wa)
-            #lines(wa$T - skew(wa$p), wa$p,
-            lines(theta2T(wa$T, wa$p) - skew(wa$p), wa$p,
+        # moist adiabats also slope up to the left (mostly) and approach dry adiabats
+        # at high altitudes.
+        for (TT in seq(-80, 300, 5)) {
+            wa <- moistAdiabat(TT) # computed by integrating dTdp_moist()
+            lines(wa$T - skew(wa$p), wa$p,
                 col = aes$adiabatWet$col, lwd = aes$adiabatWet$lwd, lty = aes$adiabatWet$lty
             )
         }
@@ -130,7 +127,8 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         for (isotherm in seq(-200, 40, 5)) {
             T0 <- isotherm - skew(p0)
             lines(T0, p0,
-                  col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty)
+                col = aes$isotherm$col, lwd = aes$isotherm$lwd, lty = aes$isotherm$lty
+            )
         }
         # mtext("Red: temperature, blue: dew point", adj = 1)
     }

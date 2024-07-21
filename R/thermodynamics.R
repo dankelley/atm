@@ -205,13 +205,15 @@ skew <- function(pressure) {
     ratio * log10(100 * pressure / 1e5) - ratio * log10(100 * 1050 / 1e5)
 }
 
-#' Compute moist adiabat line
+#' Compute moist adiabat curve for sounding plot
 #'
 #' This is done by integrating [dTdp_moist()] from p=100.5e3 Pa (1005 mbar)
-#' to 1e3 Pa (100 mbar). This is based on `draw_moist_adiabat()` in `pymeteo`,
-#' but here we do not integrate twice.  (What does that doubled integration do?)
+#' to 1e3 Pa (100 mbar). Note that the computation is done in Pa and Kelvin,
+#' so we need to do conversions at start and end, because this is used by
+#' [plot.atmosphericSounding()], which works in those units.
+## FIXME: explore sensitivity to dp.
 #'
-#' @param TC temperature in Kelvin
+#' @param TC temperature in degrees Celcius.
 #'
 #' @return `moistAdiabat' returns a data frame with `p` (in mbar) and
 #' temperature `T` (in degC).
@@ -224,10 +226,11 @@ moistAdiabat <- function(TC) {
     pp <- p
     TKTK <- TK
     for (i in 1:100) {
-        TK <- TK + dTdp_moist(TK, p) * dp
+        TK <- TK - dTdp_moist(TK, p) * dp
         p <- p - dp
         pp <- c(pp, p)
         TKTK <- c(TKTK, TK)
     }
+    # return in mbar and degC, for plotting
     data.frame(p = pp / 100, T = TK2TC(TKTK))
 }
