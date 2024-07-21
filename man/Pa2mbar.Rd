@@ -2,7 +2,7 @@
 % Please edit documentation in R/conversions.R
 \name{Pa2mbar}
 \alias{Pa2mbar}
-\title{Convert from Pascls to millibars}
+\title{Convert from Pascals to millibars}
 \usage{
 Pa2mbar(Pa)
 }
@@ -13,5 +13,5 @@ Pa2mbar(Pa)
 \code{Pa2mbar} returns pressure in millibars.
 }
 \description{
-Convert from Pascls to millibars
+Convert from Pascals to millibars
 }

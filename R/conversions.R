@@ -8,7 +8,7 @@ mbar2Pa <- function(mbar) {
     mbar * 100
 }
 
-#' Convert from Pascls to millibars
+#' Convert from Pascals to millibars
 #' @param Pa numeric value of pressure in Pascals.
 #' @return `Pa2mbar` returns pressure in millibars.
 #' @export

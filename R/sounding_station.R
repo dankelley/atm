@@ -6,7 +6,7 @@
 #' Find station number from name
 #'
 #' @param name character value indicating the name of the station.
-#' So far, there are only two choices: `"Shearwater"`` and `"Nashville"`.
+#' So far, there are only two choices: `"Shearwater"` and `"Nashville"`.
 #'
 #' @author Dan Kelley
 #'

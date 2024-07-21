@@ -96,7 +96,7 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
                 col = aes$adiabatWet$col, lwd = aes$adiabatWet$lwd, lty = aes$adiabatWet$lty
             )
         }
-        # report height at same pressures as used by Wisconson server
+        # report height at same pressures as used by Wisconsin server
         pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
         heightReport <- approx(pressure, height, pressureReport, ties = mean)$y
         if (debug > 0) {

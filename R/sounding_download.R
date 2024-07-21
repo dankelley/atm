@@ -18,7 +18,7 @@
 #' to this function might yield a failed download).
 #'
 #' @param region a character value indicating the region. This defaults
-#' to `"naconf`.
+#' to `"naconf"`.
 #'
 #' @param stationName a character value indicating the station name, which
 #' the present function converts to a station number by [stationNumber()].

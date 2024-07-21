@@ -8,7 +8,7 @@ stationNumber(name = "Shearwater")
 }
 \arguments{
 \item{name}{character value indicating the name of the station.
-So far, there are only two choices: \verb{"Shearwater"`` and }"Nashville"`.}
+So far, there are only two choices: \code{"Shearwater"} and \code{"Nashville"}.}
 }
 \description{
 Find station number from name

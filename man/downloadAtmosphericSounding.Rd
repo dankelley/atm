@@ -17,7 +17,7 @@ If not provided, the previous day is used (because an early-morning call
 to this function might yield a failed download).}
 
 \item{region}{a character value indicating the region. This defaults
-to \verb{"naconf}.}
+to \code{"naconf"}.}
 
 \item{stationName}{a character value indicating the station name, which
 the present function converts to a station number by \code{\link[=stationNumber]{stationNumber()}}.}
