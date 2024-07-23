@@ -40,7 +40,7 @@
 #' 2. Visual Explanation of Meteorological Skew T Log P Sounding Diagrams, 2019.
 #' <https://www.youtube.com/watch?v=7p7c85hhgOo>.
 #'
-#' @importFrom graphics abline legend lines mtext par rect rug strheight strwidth text
+#' @importFrom graphics abline legend lines mtext par rug text
 #' @importFrom stats approx
 #'
 #' @export
@@ -55,8 +55,8 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         temperature = list(col = 2, lwd = 3, lty = 1), # red
         isotherm = list(col = 2, lwd = 1, lty = 1), # red
         dewpoint = list(col = 4, lwd = 2, lty = 1), # blue
-        adiabatDry = list(col = 7, lwd = 1.4), # amber
-        adiabatWet = list(col = 3, lwd = 1.4) # green
+        adiabatDry = list(col = "DarkKhaki", lwd = 1.6, lty = 1),
+        adiabatWet = list(col = "DarkKhaki", lwd = 1.8, lty = 2)
     )
     pressure <- x@data$PRES
     dewpoint <- x@data$DWPT

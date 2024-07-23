@@ -14,12 +14,13 @@
 #' abline(v = 1.5)
 #' textInBox(1.5, 15, "12345 m")
 #'
+#' @importFrom graphics rect strheight strwidth
 #' @author Dan Kelley
 #'
 #' @export
 textInBox <- function(x, y, labels, font = 1, cex = 1, col = 1, bg = "white") {
-    w <- strwidth(labels) + 0.5 * strwidth("m")
-    h <- strheight(labels) + 1.5 * strheight("x")
+    w <- 1.1 * strwidth(labels, cex = cex)
+    h <- 3.0 * strheight(labels, cex = cex)
     if (par("xlog")) {
         xleft <- x * (1 - w / 2)
         xright <- x + (1 + w / 2)

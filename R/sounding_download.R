@@ -39,7 +39,7 @@ downloadAtmosphericSounding <- function(
     type <- "TEXT" # I am not sure what other values use, but the code needs this
     year <- 1900 + t$year
     month <- 1 + t$mon
-    day <- -1 + t$mday # yesterday
+    day <- t$mday
     hour <- 0 # FIXME: what are the choices for this at the data provider?
     url <- paste0(
         "https://weather.uwyo.edu/cgi-bin/sounding?",
