@@ -20,7 +20,7 @@ no documentation.
 }
 \examples{
 library(atm)
-file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
 sounding <- readSounding(file)
 
 }

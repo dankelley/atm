@@ -1,6 +1,6 @@
 #' @importFrom S7 new_class new_object S7_object
 sounding <- S7::new_class("sounding",
-    package = "atmosphere",
+    package = "atm",
     properties = list(
         data = class_list,
         metadata = class_list
