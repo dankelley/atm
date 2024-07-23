@@ -48,7 +48,7 @@
 #' @author Dan Kelley
 S7::method(`plot`, atmosphere:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
-    mar = c(2, 3, 1, 3),
+    mar = c(2, 3, 1, 0.5),
     mgp = c(2, 0.7, 0), debug = 0) {
     aes <- list(
         height = list(col = "gray", lwd = 1, lty = 1),
@@ -58,12 +58,15 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         adiabatDry = list(col = "DarkKhaki", lwd = 1.6, lty = 1),
         adiabatWet = list(col = "DarkKhaki", lwd = 1.8, lty = 2)
     )
-    pressure <- x@data$PRES
     dewpoint <- x@data$DWPT
-    temperature <- x@data$TEMP
     height <- x@data$HGHT
+    pressure <- x@data$PRES
+    temperature <- x@data$TEMP
+    windDirection <- x@data$DRCT
+    windSpeed <- x@data$SKNT
     if (item == "skewT") {
         par(mar = mar, mgp = mgp)
+        layout(matrix(1:2, ncol = 2), widths = c(0.9, 0.1))
         # print(par('mar'))
         plot(0, 1000,
             log = "y",
@@ -78,7 +81,7 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         axis(2)
         # rug(seq(-40, 40, 10), side = 1, ticksize = -0.02, lwd = par("lwd"))
         for (temp in seq(-30, 30, 10)) {
-            text(temp-2, 10^usr[3]*1.1, bquote(.(temp)*degree), srt = 45, xpd = NA, col = 2, font = 2)
+            text(temp - 2, 10^usr[3] * 1.1, bquote(.(temp) * degree), srt = 45, xpd = NA, col = 2, font = 2)
         }
         SKEW <- skew(pressure)
         lines(dewpoint - SKEW, pressure,
@@ -104,6 +107,8 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         # report height at same pressures as used by Wisconsin server
         pressureReport <- c(1000, 925, 850, 700, 600, 500, 400, 300, 200, 150)
         heightReport <- approx(pressure, height, pressureReport, ties = mean)$y
+        windDirectionReport <- approx(pressure, windDirection, pressureReport, ties = mean)$y
+        windSpeedReport <- approx(pressure, windSpeed, pressureReport, ties = mean)$y
         if (debug > 0) {
             cat("pressureReport:\n")
             print(data.frame(heightReport = heightReport, pressureReport = pressureReport))
@@ -136,5 +141,19 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         xlabel <- rep(usr[1] + 0.08 * (usr[2] - usr[1]), length(pressureReport))
         textInBox(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8)
         # mtext("Red: temperature, blue: dew point", adj = 1)
+        message("DAN 1")
+        mar <- par("mar")
+        mar[c(2, 4)] <- 0
+        par(mar = mar)
+        message("DAN 2")
+        points(rep(0, 3), c(1000, 500, 200), pch = 20, cex = 2)
+
+        plot(c(-1, 1), c(500, 500),
+            ylim = 10^usr[3:4],
+            yaxs = "i", axes = FALSE, xlab = "", ylab = "", type = "n",
+            log = "y"
+        )
+        points(rep(0, length(pressureReport)), pressureReport)
+        message("DAN 3")
     }
 }
