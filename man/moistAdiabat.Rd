@@ -16,5 +16,5 @@ moistAdiabat(TC)
 This is done by integrating \code{\link[=dTdp_moist]{dTdp_moist()}} from p=100.5e3 Pa (1005 mbar)
 to 1e3 Pa (100 mbar). Note that the computation is done in Pa and Kelvin,
 so we need to do conversions at start and end, because this is used by
-\code{\link[=plot.atmosphericSounding]{plot.atmosphericSounding()}}, which works in those units.
+\code{\link[=plot.sounding]{plot.sounding()}}, which works in those units.
 }

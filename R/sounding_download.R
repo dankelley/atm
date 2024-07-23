@@ -4,7 +4,7 @@
 #' that queries the server for a particular station and time. The
 #' construction of that URL is based on reverse-engineering the
 #' URLs that get created by clicking on a map.  This means
-#' that `downloadAtmosphericSounding` is brittle, and will
+#' that `downloadSounding` is brittle, and will
 #' fail if the server setup changes.  Unfortunately, this
 #' guessing game seems to be the best we can do, since the website
 #' does not provide information on the URL construction, let alone
@@ -30,7 +30,7 @@
 #' @export
 #'
 #' @author Dan Kelley
-downloadAtmosphericSounding <- function(
+downloadSounding <- function(
     date = Sys.Date() - 1,
     region = "naconf",
     stationName = "Shearwater") {

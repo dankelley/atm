@@ -1,7 +1,7 @@
 #' Draw a box with text on top
 #'
 #' This is useful for adding text to busy plots, as the altitude labels in
-#' skew-T diagrams created with [plot.atmosphericSounding()].
+#' skew-T diagrams created with [plot.sounding()].
 #'
 #' @param x,y,labels,font,cex,col as for [text()].
 #'

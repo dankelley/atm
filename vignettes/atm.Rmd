@@ -1,5 +1,5 @@
 ---
-title: "Introduction to the atmospheric Package"
+title: "Introduction to the atm Package"
 author: "Dan Kelley (https://orcid.org/0000-0001-7808-5911)"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     dpi: 72
     dev.args: list(pointsize=11)
 vignette: >
-  %\VignetteIndexEntry{Introduction to the atmospheric Package}
+  %\VignetteIndexEntry{Introduction to the atm Package}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options:
@@ -42,10 +42,10 @@ There are several errors and deficiencies with this graph, including the followi
 2. wind barbs should be added
 3. text summaries should be added
 
-```{r, echo = TRUE, fig.width = 5, fig.height = 5, fig.cap = "Skew-T log-P sounding profile at Shearwater, Nova Scotia, Canada, on July 11, 2024. The wider line represents temperature and the  thinner line represents dew point. The curves are skewed to the right; to read values, trace the 45 degree lines down to the horizontal axis. Orange curved lines are dry adiabats, and green curved lines are moist adiabats; note how they arpproach at high altitudes."}
-library(atmosphere)
-file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-sounding <- readAtmosphericSounding(file)
+```{r, echo = TRUE, fig.width = 5, fig.height = 5, fig.cap = "Skew-T log-P sounding profile at Shearwater, Nova Scotia, Canada, on July 11, 2024. The wider line represents temperature and the  thinner line represents dew point. The curves are skewed to the right; to read values, trace the 45 degree lines down to the horizontal axis. The solid dark green curves are dry adiabats, and the dashed ones are moist adiabats (think of dash as representing rain)."}
+library(atm)
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
+sounding <- readSounding(file)
 plot(sounding)
 ```
 

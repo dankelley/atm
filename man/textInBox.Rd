@@ -13,7 +13,7 @@ textInBox(x, y, labels, font = 1, cex = 1, col = 1, bg = "white")
 }
 \description{
 This is useful for adding text to busy plots, as the altitude labels in
-skew-T diagrams created with \code{\link[=plot.atmosphericSounding]{plot.atmosphericSounding()}}.
+skew-T diagrams created with \code{\link[=plot.sounding]{plot.sounding()}}.
 }
 \examples{
 plot(c(1, 2), c(10, 20), bg = "gray", type = "n")

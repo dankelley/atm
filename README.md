@@ -1,13 +1,13 @@
-# The atmosphere R package
+# The atm R package
 
 <!-- badges: start -->
 
 [![GitHub last
-commit](https://img.shields.io/github/last-commit/dankelley/atmosphere)](https://img.shields.io/github/last-commit/dankelley/atmosphere)
-[![R-CMD-check](https://github.com/dankelley/atmosphere/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dankelley/atmosphere/actions/workflows/R-CMD-check.yaml)
+commit](https://img.shields.io/github/last-commit/dankelley/atm)](https://img.shields.io/github/last-commit/dankelley/atm)
+[![R-CMD-check](https://github.com/dankelley/atm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dankelley/atm/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The `atmosphere` package provides R functions for dealing with atmospheric
+The `atm` package provides R functions for dealing with atmospheric
 properties. It is *very* preliminary, and function names and actions may change
 a lot at any moment.
 
@@ -27,6 +27,6 @@ and 3.
 2. Fontana, Joe. “Learn to Read a Skew-T Diagram Like a Meteorologist!
    In Pictures.” Wildcard Weather (blog), February 22, 2015.
 <https://wildcardweather.com/2015/02/21/learn-to-read-a-skew-t-diagram-like-a-meteorologist-in-pictures/>.
- 
+
 3. National Oceanic and Atmospheric Administration. “Skew-T Plots,”
    July 21, 2024. <https://www.noaa.gov/jetstream/upperair/skew-t-plots>.

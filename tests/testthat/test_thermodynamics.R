@@ -1,5 +1,5 @@
 # vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
-library(atmosphere)
+library(atm)
 
 test_that("dTdp_moist cf pymeteo result", {
     TK <- 300 # K

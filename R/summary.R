@@ -1,19 +1,19 @@
 #' Summarize a sounding
 #'
-#' @param x a `sounding` object, created with [readAtmosphericSounding()].
+#' @param x a `sounding` object, created with [readSounding()].
 #'
 #' @name summary
 #'
 #' @examples
-#' library(atmosphere)
-#' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-#' sounding <- readAtmosphericSounding(file)
+#' library(atm)
+#' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
+#' sounding <- readSounding(file)
 #' summary(sounding)
 #'
 #' @export
 #'
 #' @author Dan Kelley
-S7::method(`summary`, atmosphere:::sounding) <- function(x) {
+S7::method(`summary`, atm:::sounding) <- function(x) {
     cat(sprintf(
         "Station %s (#%s at %.2fE, %.2fN) on %s: %d data and %d metadata\n",
         x@metadata[["Station identifier"]],

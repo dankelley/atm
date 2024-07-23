@@ -4,15 +4,15 @@
 \alias{summary}
 \title{Summarize a sounding}
 \arguments{
-\item{x}{a \code{sounding} object, created with \code{\link[=readAtmosphericSounding]{readAtmosphericSounding()}}.}
+\item{x}{a \code{sounding} object, created with \code{\link[=readSounding]{readSounding()}}.}
 }
 \description{
 Summarize a sounding
 }
 \examples{
-library(atmosphere)
-file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-sounding <- readAtmosphericSounding(file)
+library(atm)
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
+sounding <- readSounding(file)
 summary(sounding)
 
 }

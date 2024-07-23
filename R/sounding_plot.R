@@ -3,7 +3,7 @@
 #' This is a preliminary version.  Over time, it might be evolved to
 #' plot something nearer what is shown at Reference 1.
 #'
-#' @param sounding the result of a call to [readAtmosphericSounding()].
+#' @param sounding the result of a call to [readSounding()].
 #'
 #' @param item character value indicating what to plot. At the moment,
 #' the only choices is the default, `"DWPT+TEMP"`.
@@ -26,13 +26,13 @@
 #' particular behaviour.)
 #'
 #' @name plot
-#' @aliases plot.atmosphericSounding
+#' @aliases plot.sounding
 #'
 #' @examples
-#' library(atmosphere)
-#' # Normally, would download the file with downloadAtmosphericSounding()
-#' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-#' sounding <- readAtmosphericSounding(file)
+#' library(atm)
+#' # Normally, would download the file with downloadSounding()
+#' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
+#' sounding <- readSounding(file)
 #' plot(sounding)
 #'
 #' @references
@@ -46,7 +46,7 @@
 #' @export
 #'
 #' @author Dan Kelley
-S7::method(`plot`, atmosphere:::sounding) <- function(
+S7::method(`plot`, atm:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
     mar = c(2, 3, 1, 0.5),
     mgp = c(2, 0.7, 0), debug = 0) {
@@ -66,7 +66,9 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
     windSpeed <- x@data$SKNT
     if (item == "skewT") {
         par(mar = mar, mgp = mgp)
-        layout(matrix(1:2, ncol = 2), widths = c(0.9, 0.1))
+        if (FALSE) {
+            layout(matrix(1:2, ncol = 2), widths = c(0.9, 0.1))
+        }
         # print(par('mar'))
         plot(0, 1000,
             log = "y",
@@ -140,20 +142,18 @@ S7::method(`plot`, atmosphere:::sounding) <- function(
         # label heights (with white below)
         xlabel <- rep(usr[1] + 0.08 * (usr[2] - usr[1]), length(pressureReport))
         textInBox(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8)
-        # mtext("Red: temperature, blue: dew point", adj = 1)
-        message("DAN 1")
-        mar <- par("mar")
-        mar[c(2, 4)] <- 0
-        par(mar = mar)
-        message("DAN 2")
-        points(rep(0, 3), c(1000, 500, 200), pch = 20, cex = 2)
-
-        plot(c(-1, 1), c(500, 500),
-            ylim = 10^usr[3:4],
-            yaxs = "i", axes = FALSE, xlab = "", ylab = "", type = "n",
-            log = "y"
-        )
-        points(rep(0, length(pressureReport)), pressureReport)
-        message("DAN 3")
+        if (FALSE) { # FIXME: add wind barbs (tricky to use oce code, since y is log)
+            # mtext("Red: temperature, blue: dew point", adj = 1)
+            mar <- par("mar")
+            mar[c(2, 4)] <- 0
+            par(mar = mar)
+            # points(rep(0, 3), c(1000, 500, 200), pch = 20, cex = 2) # test that RHS is okay
+            plot(c(-1, 1), c(500, 500),
+                 ylim = 10^usr[3:4],
+                 yaxs = "i", axes = FALSE, xlab = "", ylab = "", type = "n",
+                 log = "y"
+            )
+            points(rep(0, length(pressureReport)), pressureReport)
+        }
     }
 }

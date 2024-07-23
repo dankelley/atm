@@ -2,10 +2,10 @@
 % Please edit documentation in R/sounding_plot.R
 \name{plot}
 \alias{plot}
-\alias{plot.atmosphericSounding}
+\alias{plot.sounding}
 \title{Plot atmospheric sounding data}
 \arguments{
-\item{sounding}{the result of a call to \code{\link[=readAtmosphericSounding]{readAtmosphericSounding()}}.}
+\item{sounding}{the result of a call to \code{\link[=readSounding]{readSounding()}}.}
 
 \item{item}{character value indicating what to plot. At the moment,
 the only choices is the default, \code{"DWPT+TEMP"}.}
@@ -32,10 +32,10 @@ This is a preliminary version.  Over time, it might be evolved to
 plot something nearer what is shown at Reference 1.
 }
 \examples{
-library(atmosphere)
-# Normally, would download the file with downloadAtmosphericSounding()
-file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-sounding <- readAtmosphericSounding(file)
+library(atm)
+# Normally, would download the file with downloadSounding()
+file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atm")
+sounding <- readSounding(file)
 plot(sounding)
 
 }

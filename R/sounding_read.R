@@ -1,6 +1,6 @@
 #' Read atmospheric sounding data
 #'
-#' Read an HTML file downloaded by [downloadAtmosphericSounding()].  This
+#' Read an HTML file downloaded by [downloadSounding()].  This
 #' code works by recognizing portions of the file as preformatted blocks, which
 #' is a brittle method that will fail if the HTML format used on the server website
 #' changes.  Obviously, it would be better to work with csv or json files, but
@@ -8,17 +8,17 @@
 #' no documentation.
 #'
 #' @param file character value indicating the name of a sounding file.
-#' This file must have been downloaded with [downloadAtmosphericSounding()].
+#' This file must have been downloaded with [downloadSounding()].
 #'
 #' @examples
-#' library(atmosphere)
+#' library(atm)
 #' file <- system.file("extdata", "Shearwater_2024-07-11.txt.gz", package = "atmosphere")
-#' sounding <- readAtmosphericSounding(file)
+#' sounding <- readSounding(file)
 #'
 #' @author Dan Kelley
 #'
 #' @export
-readAtmosphericSounding <- function(file) {
+readSounding <- function(file) {
     # Read whole file into a buffer, so we can find <PRE> and </PRE> tags,
     # which denote the two blocks that hold in profile data and meta data,
     # respectively.

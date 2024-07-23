@@ -210,7 +210,7 @@ skew <- function(pressure) {
 #' This is done by integrating [dTdp_moist()] from p=100.5e3 Pa (1005 mbar)
 #' to 1e3 Pa (100 mbar). Note that the computation is done in Pa and Kelvin,
 #' so we need to do conversions at start and end, because this is used by
-#' [plot.atmosphericSounding()], which works in those units.
+#' [plot.sounding()], which works in those units.
 ## FIXME: explore sensitivity to dp.
 #'
 #' @param TC temperature in degrees Celcius.

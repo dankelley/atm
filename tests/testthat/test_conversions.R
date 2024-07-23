@@ -1,5 +1,5 @@
 # vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
-library(atmosphere)
+library(atm)
 
 test_that("conversion between Pa and millibar", {
     expect_equal(50000, mbar2Pa(500))

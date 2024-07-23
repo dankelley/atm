@@ -1,4 +1,4 @@
 library(testthat)
-library(atmosphere)
+library(atm)
 
-test_check("atmosphere")
+test_check("atm")
