@@ -14,7 +14,8 @@ windBarbs(
   step = 10,
   lwd = 1,
   col = 1,
-  debug = FALSE
+  colFlags = 1,
+  debug = 0
 )
 }
 \arguments{
@@ -37,6 +38,10 @@ The default value of 10 is somewhat standard for speeds in knots.}
 
 \item{col}{colour of barbs.}
 
+\item{colFlags}{colour of interior of flags.  This is 1 by default,
+to fill the flags with black ink, but lighter colours may be preferable
+to some eyes.}
+
 \item{debug}{integer that controls tell degree of debugging.  If this is
 zero, work proceeds silently.  Otherwise, some debugging information will
 be printed.}
@@ -47,18 +52,20 @@ that the plot aspect ratio be 1.
 }
 \examples{
 library(atm)
-n <- 10
-L <- 10
-x <- seq(-L, L, length.out = n)
-y <- seq(-L, L, length.out = n)
-plot(x, y, type = "n", xlab = "x", ylab = "y", asp = 1)
-g <- expand.grid(x = x, y = y)
-R <- sqrt(g$x^2 + g$y^2)
-U <- 30 * R * exp(-R / (L / 2))
-theta <- atan2(g$y, g$x)
-g$u <- U * sin(theta)
-g$v <- -U * cos(theta)
-windBarbs(g$x, g$y, g$u, g$v, length=0.5, scale = 2)
+L <- 8
+plot(c(-L, L), c(-L, L), asp = 1, type = "n", xlab = "", ylab = "")
+y <- -7
+windBarbs(0, y, 70 * cospi(45 / 180), 70 * sinpi(45 / 180), scale = 2, colFlags = grey(0.9))
+text(1, y, 70)
+y <- y + 1
+windBarbs(0, y, 70, 0, scale = 2, colFlags = grey(0.9))
+text(1, y, 70)
+y <- y + 1
+for (i in 0:13) {
+    windBarbs(0, y, 65 - 5 * i, 0, scale = 2, colFlags = grey(0.9))
+    text(1, y, 65 - 5 * i)
+    y <- y + 1
+}
 
 }
 \author{
