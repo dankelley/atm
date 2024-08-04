@@ -31,6 +31,7 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/atm.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -53,7 +54,7 @@
       <h1>Introduction to the atm Package</h1>
                         <h4 data-toc-skip class="author">Dan Kelley (<a href="https://orcid.org/0000-0001-7808-5911" class="external-link uri">https://orcid.org/0000-0001-7808-5911</a>)</h4>
             
-            <h4 data-toc-skip class="date">2024-07-23</h4>
+            <h4 data-toc-skip class="date">2024-08-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dankelley/atm/blob/main/vignettes/atm.Rmd" class="external-link"><code>vignettes/atm.Rmd</code></a></small>
       <div class="d-none name"><code>atm.Rmd</code></div>
@@ -74,8 +75,9 @@ server (Reference 1) is unreachable or is too busy to return files.</p>
 the following.</p>
 <ol style="list-style-type: decimal">
 <li>water fraction should be added</li>
-<li>wind barbs should be added</li>
-<li>text summaries should be added</li>
+<li>perhaps text summaries should be added, although I’m not sure on
+this because the summaries in the data files don’t have things that seem
+most interesting, like CAPE</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dankelley/atm/" class="external-link">atm</a></span><span class="op">)</span></span>
@@ -84,13 +86,14 @@ the following.</p>
 <span><span class="va">sounding</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readSounding.html">readSounding</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot.html">plot</a></span><span class="op">(</span><span class="va">sounding</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="atm_files/figure-html/unnamed-chunk-2-1.png" alt="Skew-T log-P sounding profile at Shearwater, Nova Scotia, Canada, on July 11, 2024. The wider line represents temperature and the  thinner line represents dew point. The curves are skewed to the right; to read values, trace the 45 degree lines down to the horizontal axis. The solid dark green curves are dry adiabats, and the dashed ones are moist adiabats (think of dash as representing rain)." width="480"><p class="caption">
+<img src="atm_files/figure-html/unnamed-chunk-2-1.png" alt="Skew-T log-P sounding profile at Shearwater, Nova Scotia, Canada, on July 11, 2024. The red line represents temperature and the slighly thinner blue line represents dew point. The solid dark green curves are dry adiabats, and the dashed ones are moist adiabats (think of dash as representing rain). All of these curves are skewed, so that to read values, find one of the red 45 degree lines and trace it down to a temperature on the bottom axis." width="672"><p class="caption">
 Skew-T log-P sounding profile at Shearwater, Nova Scotia, Canada, on
-July 11, 2024. The wider line represents temperature and the thinner
-line represents dew point. The curves are skewed to the right; to read
-values, trace the 45 degree lines down to the horizontal axis. The solid
-dark green curves are dry adiabats, and the dashed ones are moist
-adiabats (think of dash as representing rain).
+July 11, 2024. The red line represents temperature and the slighly
+thinner blue line represents dew point. The solid dark green curves are
+dry adiabats, and the dashed ones are moist adiabats (think of dash as
+representing rain). All of these curves are skewed, so that to read
+values, find one of the red 45 degree lines and trace it down to a
+temperature on the bottom axis.
 </p>
 </div>
 </div>
