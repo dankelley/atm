@@ -48,8 +48,10 @@
 #' @author Dan Kelley
 S7::method(`plot`, atm:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
-    mar = c(2, 3, 1, 0.5),
+    mar = c(2, 3, 1, 0),
     mgp = c(2, 0.7, 0), debug = 0) {
+    layout(matrix(1:2, nrow = 1), widths = c(0.85, 0.15))
+
     aes <- list(
         height = list(col = "gray", lwd = 1, lty = 1),
         temperature = list(col = 2, lwd = 3, lty = 1), # red
@@ -142,18 +144,37 @@ S7::method(`plot`, atm:::sounding) <- function(
         # label heights (with white below)
         xlabel <- rep(usr[1] + 0.08 * (usr[2] - usr[1]), length(pressureReport))
         textInBox(xlabel, pressureReport, sprintf("%.0f m", heightReport), cex = 0.8)
-        if (FALSE) { # FIXME: add wind barbs (tricky to use oce code, since y is log)
-            # mtext("Red: temperature, blue: dew point", adj = 1)
-            mar <- par("mar")
-            mar[c(2, 4)] <- 0
-            par(mar = mar)
-            # points(rep(0, 3), c(1000, 500, 200), pch = 20, cex = 2) # test that RHS is okay
-            plot(c(-1, 1), c(500, 500),
-                 ylim = 10^usr[3:4],
-                 yaxs = "i", axes = FALSE, xlab = "", ylab = "", type = "n",
-                 log = "y"
+        # Panel 2: wind barbs
+        ylim <- -par("usr")[3:4]
+        par(mar = c(mar[1], 0, mar[3], 0)) # no axes so remove left-right margins
+        par(xpd = NA) # permit barbs outside box
+        plot(rep(0, 2), ylim,
+            xaxs = "i", yaxs = "i",
+            ylim = ylim, asp = 1, type = "n",
+            axes = FALSE, xlab = "", ylab = ""
+        )
+        #box()
+        # FIXME: perhaps scale and length ought to be parameters to this function
+        scale <- 0.07
+        length <- 0.02
+        theta <- 180 - (90 - windDirectionReport) # use math conversion
+        u <- windSpeedReport * cospi(theta / 180)
+        v <- windSpeedReport * sinpi(theta / 180)
+        if (debug > 0) {
+            print(data.frame(p = pressureReport, dir = windDirectionReport, sp = windSpeedReport, u = u, v = v),
+                digits = 2
             )
-            points(rep(0, length(pressureReport)), pressureReport)
         }
+        points(rep(0, length(pressureReport)), -log10(pressureReport),
+            cex = 0.5, pch = 20, col = gray(0.5)
+        )
+        windBarbs(rep(0, length(pressureReport)), -log10(pressureReport),
+            u, -v,
+            scale = scale, length = length,
+            col = gray(0.5),
+            colFlag = gray(0.9),
+            debug = debug - 1
+        )
+        # windBarbs(0, log10(1005), 10, 0, scale = scale, length = length)
     }
 }
