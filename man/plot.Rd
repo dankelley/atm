@@ -28,8 +28,14 @@ vary over the course of evolution of the code, so do not rely on
 particular behaviour.)}
 }
 \description{
-This is a preliminary version.  Over time, it might be evolved to
-plot something nearer what is shown at Reference 1.
+Display sounding data in profile form.  Red lines sloping from bottom-left
+to top-right indicate temperatures. The thicker red curve is in-situ temperature.
+The thinner blue curve is dew-point temperature.  The curved olive green
+lines indicate wet and dry adiabats, with dashed lines used for
+the former. The vertical axis represents pressure, and thin horizontal
+lines are drawn to indicate standard heights. The wind barbs drawn to the right
+of the profile indicate velocities at those heights in meteorological
+convention for speeds in knots.
 }
 \examples{
 library(atm)
