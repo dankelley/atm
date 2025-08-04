@@ -42,7 +42,7 @@
 #' plot(sounding)
 #'
 #' @references
-#' 1. <https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams>
+#' 1. `https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams`
 #' 2. Visual Explanation of Meteorological Skew T Log P Sounding Diagrams, 2019.
 #' <https://www.youtube.com/watch?v=7p7c85hhgOo>.
 #'

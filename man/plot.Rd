@@ -47,7 +47,7 @@ plot(sounding)
 }
 \references{
 \enumerate{
-\item \url{https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams}
+\item \verb{https://www.noaa.gov/jetstream/upperair/skew-t-log-p-diagrams}
 \item Visual Explanation of Meteorological Skew T Log P Sounding Diagrams, 2019.
 \url{https://www.youtube.com/watch?v=7p7c85hhgOo}.
 }

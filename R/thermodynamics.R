@@ -2,7 +2,7 @@
 
 # Below, WC stands for Wallace, John M., and Peter Victor Hobbs. Atmospheric
 # Science: An Introductory Survey. 2nd ed. International Geophysics Series, v.
-# 92. Amsterdam ; Boston: Elsevier Academic Press, 2006.
+# 92. Amsterdam; Boston: Elsevier Academic Press, 2006.
 
 g <- 9.81 # acceleration due to gravity (depends on altitude and latitude)
 pressureReference <- 1e3 # reference pressure in mbar (use 1e5 if in Pa)
@@ -44,7 +44,7 @@ cv <- 718. # pymeteo
 #' @references
 #' 1. Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
 #'    Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
-#'    Amsterdam ; Boston: Elsevier Academic Press, 2006.
+#'    Amsterdam; Boston: Elsevier Academic Press, 2006.
 #' 2. <https://github.com/cwebster2/pyMeteo>
 #'
 #' @export
@@ -80,7 +80,7 @@ theta2T <- function(theta, pressure,
 #' @references
 #' 1. Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
 #'    Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
-#'    Amsterdam ; Boston: Elsevier Academic Press, 2006.
+#'    Amsterdam; Boston: Elsevier Academic Press, 2006.
 #' 2. <https://github.com/cwebster2/pyMeteo>
 #'
 #' @export

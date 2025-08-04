@@ -31,7 +31,7 @@ of \code{theta2T()}.
 \enumerate{
 \item Wallace, John M., and Peter Victor Hobbs. Atmospheric Science: An
 Introductory Survey. 2nd ed. International Geophysics Series, volume 92.
-Amsterdam ; Boston: Elsevier Academic Press, 2006.
+Amsterdam; Boston: Elsevier Academic Press, 2006.
 \item \url{https://github.com/cwebster2/pyMeteo}
 }
 }
