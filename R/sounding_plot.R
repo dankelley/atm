@@ -55,7 +55,7 @@
 S7::method(`plot`, atm:::sounding) <- function(
     x, item = "skewT", legend = FALSE,
     mar = c(2, 3, 1, 0),
-    mgp = c(2, 0.7, 0), debug = 0) {
+    mgp = c(2, 0.7, 0), debug = 0, ...) {
     layout(matrix(1:2, nrow = 1), widths = c(0.85, 0.15))
 
     aes <- list(

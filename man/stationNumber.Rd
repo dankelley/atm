@@ -4,11 +4,12 @@
 \alias{stationNumber}
 \title{Find station number from name}
 \usage{
-stationNumber(name = "Shearwater")
+stationNumber(name = NULL)
 }
 \arguments{
 \item{name}{character value indicating the name of the station.
-So far, there are only two choices: \code{"Shearwater"} and \code{"Nashville"}.}
+Use \code{name=NULL} (the default) to get a list of known names.
+This list is \emph{very} short, and not necessarily up-to-date!}
 }
 \description{
 Find station number from name

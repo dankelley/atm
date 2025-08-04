@@ -22,11 +22,11 @@ and 3.
 # References
 
 1. University of Wyoming. “Radiosonde Data,” July 21, 2024.
-<https://weather.uwyo.edu/upperair/sounding.html>
+<https://weather.uwyo.edu/upperair/sounding.shtml>
 
 2. Fontana, Joe. “Learn to Read a Skew-T Diagram Like a Meteorologist!
    In Pictures.” Wildcard Weather (blog), February 22, 2015.
 <https://wildcardweather.com/2015/02/21/learn-to-read-a-skew-t-diagram-like-a-meteorologist-in-pictures/>.
 
 3. National Oceanic and Atmospheric Administration. “Skew-T Plots,”
-   July 21, 2024. <https://www.noaa.gov/jetstream/upperair/skew-t-plots>.
+   July 21, 2024. <https://weather.uwyo.edu/upperair/sounding.shtml>

@@ -25,7 +25,7 @@
 #'
 #' @references
 #'
-#' 1. <https://weather.uwyo.edu/upperair/sounding.html>
+#' 1. <https://weather.uwyo.edu/upperair/sounding.shtml>
 #'
 #' @export
 #'

@@ -35,7 +35,7 @@ an API.
 }
 \references{
 \enumerate{
-\item \url{https://weather.uwyo.edu/upperair/sounding.html}
+\item \url{https://weather.uwyo.edu/upperair/sounding.shtml}
 }
 }
 \author{

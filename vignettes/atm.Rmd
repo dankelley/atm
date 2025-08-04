@@ -52,5 +52,5 @@ plot(sounding)
 
 # References
 
-1. <https://weather.uwyo.edu/upperair/sounding.html>
+1. <https://weather.uwyo.edu/upperair/sounding.shtml>
 2. <https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2024&MONTH=07&FROM=1012&TO=1012&STNM=73110>

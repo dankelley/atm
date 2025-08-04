@@ -13,15 +13,15 @@
 #' @export
 #'
 #' @author Dan Kelley
-S7::method(`summary`, atm:::sounding) <- function(x) {
+S7::method(`summary`, atm:::sounding) <- function(object, ...) {
     cat(sprintf(
         "Station %s (#%s at %.2fE, %.2fN) on %s: %d data and %d metadata\n",
-        x@metadata[["Station identifier"]],
-        x@metadata[["Station number"]],
-        x@metadata[["Station longitude"]],
-        x@metadata[["Station latitude"]],
-        x@metadata[["Observation time"]],
-        length(x@data), length(x@metadata)
+        object@metadata[["Station identifier"]],
+        object@metadata[["Station number"]],
+        object@metadata[["Station longitude"]],
+        object@metadata[["Station latitude"]],
+        object@metadata[["Observation time"]],
+        length(object@data), length(object@metadata)
     ))
-    invisible(x)
+    invisible(object)
 }
