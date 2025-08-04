@@ -4,23 +4,27 @@ f <- "radiosonde.json"
 library(jsonlite)
 library(oce)
 data(coastlineWorldFine, package = "ocedata")
-if (!exists("lat")) {
-    d <- read_json(f)
-    lat <- sapply(d, \(x) x$lat)
-    lon <- sapply(d, \(x) x$lon)
-    alt <- sapply(d, \(x) x$alt) / 1e3 # km
-    temp <- sapply(d, \(x) {
-        t <- x$temp
+
+d <- read_json(f)
+getVar <- function(d, name) {
+    var <- sapply(d, \(x) {
+        t <- x[[name]]
         if (is.null(t)) NA else t
-    })
-    humidity <- sapply(d, \(x) {
-        t <- x$humidity
-        if (is.null(t)) NA else t
-    })
-    time <- gsub(".000Z", "", sapply(d, \(x) x$datetime)) |> as.POSIXct(format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
+    }) |> unlist()
 }
+lat <- getVar(d, "lat")
+lon <- getVar(d, "lon")
+lat <- getVar(d, "lat")
+alt <- getVar(d, "alt")
+temp <- getVar(d, "temp")
+humidity <- getVar(d, "humidity")
+datetime <- gsub(".000Z", "", getVar(d, "datetime"))
+time <- as.POSIXct(datetime, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
 if (!interactive()) {
-    png("radiosonde_path.png", units = "in", width = 7, height = 5, pointsize = 11, res = 200)
+    png("radiosonde_path.png",
+        units = "in",
+        width = 7, height = 5, pointsize = 11, res = 200
+    )
 }
 l <- layout(rbind(c(1, 2), c(5, 3), c(6, 4)))
 asp <- 1 / cos(mean(lat) * pi / 180)
@@ -71,5 +75,4 @@ plot(humidity, alt,
     xlab = "Humidity",
     ylab = "Altitude [km]"
 )
-# )
 # print(sort(names(d[[100]])))
