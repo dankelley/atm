@@ -15,7 +15,7 @@
 #' @author Dan Kelley
 S7::method(`summary`, atm:::sounding) <- function(object, ...) {
     cat(sprintf(
-        "Station %s (#%s at %.2fE, %.2fN) on %s: %d data and %d metadata\n",
+        "Station %s (#%s at %.2fE, %.2fN) on %s: %d data and %d metadata; the metadata are as follows:\n",
         object@metadata[["Station identifier"]],
         object@metadata[["Station number"]],
         object@metadata[["Station longitude"]],
@@ -23,5 +23,6 @@ S7::method(`summary`, atm:::sounding) <- function(object, ...) {
         object@metadata[["Observation time"]],
         length(object@data), length(object@metadata)
     ))
+    cat(str(object@metadata))
     invisible(object)
 }

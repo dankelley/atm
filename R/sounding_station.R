@@ -14,8 +14,10 @@
 #' @export
 stationNumber <- function(name = NULL) {
     choices <- list(
-        "Shearwater" = "73110", "Nashville" = "72327",
-        "Yarmouth" = "71603"
+        "Shearwater, NS" = "73110", # fails Aug 4, 2025
+        "Mount Pearl, NF" = "71802",
+        "Nashville, TE" = "72327",
+        "Yarmouth, NS" = "71603"
     )
     if (!is.null(name) && name %in% names(choices)) {
         return(choices[[name]])

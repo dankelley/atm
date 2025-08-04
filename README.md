@@ -21,7 +21,7 @@ and 3.
 
 # References
 
-1. University of Wyoming. “Radiosonde Data,” July 21, 2024.
+1. University of Wyoming. “Radiosonde Data,” August 4, 2025.
 <https://weather.uwyo.edu/upperair/sounding.shtml>
 
 2. Fontana, Joe. “Learn to Read a Skew-T Diagram Like a Meteorologist!
