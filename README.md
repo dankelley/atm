@@ -7,7 +7,7 @@ commit](https://img.shields.io/github/last-commit/dankelley/atm)](https://img.sh
 [![R-CMD-check](https://github.com/dankelley/atm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dankelley/atm/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The `atm` package provides R functions for dealing with atmospheric
+The `atm` package provides some crude R functions for dealing with atmospheric
 properties. It is *very* preliminary, and function names and actions may change
 a lot at any moment.
 
